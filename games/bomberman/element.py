@@ -26,18 +26,18 @@ from argparse import ArgumentError
 
 _ELEMENTS = dict(
 
-    # The Bomberman
-    BOMBERMAN = b'\xe2\x98\xba'.decode(),               # '☺' - this is what he usually looks like
-    BOMB_BOMBERMAN = b'\xe2\x98\xbb'.decode(),          # '☻' - this is if he is sitting on own bomb
-    DEAD_BOMBERMAN = b'\xd1\xa0'.decode(),              # 'Ѡ' - oops your Bomberman is dead (don`t worry he will appear somewhere in next move)
+    # The Hero
+    HERO = b'\xe2\x98\xba'.decode(),                    # '☺' - this is what he usually looks like
+    BOMB_HERO = b'\xe2\x98\xbb'.decode(),               # '☻' - this is if he is sitting on own bomb
+    DEAD_HERO = b'\xd1\xa0'.decode(),                   # 'Ѡ' - oops your Hero is dead (don`t worry he will appear somewhere in next move)
                                                         #       you`re getting -200 for each death
     # The Enemies
-    OTHER_BOMBERMAN = b'\xe2\x99\xa5'.decode(),         # '♥' - this is what other Bombermans looks like
-    OTHER_BOMB_BOMBERMAN = b'\xe2\x99\xa0'.decode(),    # '♠' - this is if player just set the bomb
-    OTHER_DEAD_BOMBERMAN = b'\xe2\x99\xa3'.decode(),    # '♣' - enemy corpse (it will disappear shortly right on the next move)
+    OTHER_HERO = b'\xe2\x99\xa5'.decode(),              # '♥' - this is what other Heroes looks like
+    OTHER_BOMB_HERO = b'\xe2\x99\xa0'.decode(),         # '♠' - this is if player just set the bomb
+    OTHER_DEAD_HERO = b'\xe2\x99\xa3'.decode(),         # '♣' - enemy corpse (it will disappear shortly right on the next move)
                                                         #       if you`ve done it you`ll get +1000
     # The Bombs
-    BOMB_TIMER_5 = '5',                                 # '5' - after bomberman set the bomb the timer starts (5 tacts)
+    BOMB_TIMER_5 = '5',                                 # '5' - after hero set the bomb the timer starts (5 tacts)
     BOMB_TIMER_4 = '4',                                 # '4' - this will blow up after 4 tacts
     BOMB_TIMER_3 = '3',                                 # '3' - this after 3
     BOMB_TIMER_2 = '2',                                 # '2' - two
@@ -52,7 +52,7 @@ _ELEMENTS = dict(
 
     # Meatchoopers
     MEAT_CHOPPER = '&',                                 # '&' - this guys runs over the board randomly and gets in the way all the time
-                                                        #       if it will touch bomberman - it will die
+                                                        #       if it will touch hero - it will die
     DEAD_MEAT_CHOPPER = 'x',                            # 'x' - you`d better kill this piece of ... meat you`ll get +100 point for it
                                                         #       this is chopper corpse
 
@@ -63,7 +63,7 @@ _ELEMENTS = dict(
     BOMB_REMOTE_CONTROL = 'r',                          # 'r' - Do not die after bomb blast (own bombs and others as well). Temporary.
 
     # Space
-    NONE = ' '                                          # ' ' - this is the only place where you can move your Bomberman
+    NONE = ' '                                          # ' ' - this is the only place where you can move your Hero
 )
 
 

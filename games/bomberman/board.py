@@ -28,12 +28,12 @@ from games.bomberman.element import Element
 class Board(AbstractBoard):
 
     def to_string(self):
-        return ("{brd}\n\nBomberman at: {mbm}\nOther Bombermans "
+        return ("{brd}\n\nHero at: {mbm}\nOther Heroes "
                 "at: {obm}\nMeat Choppers at: {mcp}\nDestroy Walls at:"
                 " {dwl}\nBombs at: {bmb}\nBlasts at: {bls}\nExpected "
                 "Blasts at: {ebl}".format(brd=self._line_by_line(),
-                                          mbm=self.get_bomberman(),
-                                          obm=self.get_other_bombermans(),
+                                          mbm=self.get_hero(),
+                                          obm=self.get_other_heroes(),
                                           mcp=self.get_meat_choppers(),
                                           dwl=self.get_destroy_walls(),
                                           bmb=self.get_bombs(),
@@ -48,22 +48,22 @@ class Board(AbstractBoard):
     def is_barrier_at(self, x, y):
         return Point(x, y) in self.get_barriers()
 
-    def is_my_bomberman_dead(self):
-        return Element('DEAD_BOMBERMAN').get_char() in self._string
+    def is_my_hero_dead(self):
+        return Element('DEAD_HERO').get_char() in self._string
 
-    def get_bomberman(self):
+    def get_hero(self):
         points = set()
-        points.update(self._find_all(Element('BOMBERMAN')))
-        points.update(self._find_all(Element('BOMB_BOMBERMAN')))
-        points.update(self._find_all(Element('DEAD_BOMBERMAN')))
-        assert len(points) <= 1, "There should be only one bomberman"
+        points.update(self._find_all(Element('HERO')))
+        points.update(self._find_all(Element('BOMB_HERO')))
+        points.update(self._find_all(Element('DEAD_HERO')))
+        assert len(points) <= 1, "There should be only one hero"
         return list(points)[0]
 
-    def get_other_bombermans(self):
+    def get_other_heroes(self):
         points = set()
-        points.update(self._find_all(Element('OTHER_BOMBERMAN')))
-        points.update(self._find_all(Element('OTHER_BOMB_BOMBERMAN')))
-        points.update(self._find_all(Element('OTHER_DEAD_BOMBERMAN')))
+        points.update(self._find_all(Element('OTHER_HERO')))
+        points.update(self._find_all(Element('OTHER_BOMB_HERO')))
+        points.update(self._find_all(Element('OTHER_DEAD_HERO')))
         return list(points)
 
     def get_meat_choppers(self):
@@ -75,7 +75,7 @@ class Board(AbstractBoard):
         points.update(self.get_bombs())
         points.update(self.get_destroy_walls())
         points.update(self.get_meat_choppers())
-        points.update(self.get_other_bombermans())
+        points.update(self.get_other_heroes())
         return list(points)
 
     def get_walls(self):
@@ -91,7 +91,7 @@ class Board(AbstractBoard):
         points.update(self._find_all(Element('BOMB_TIMER_3')))
         points.update(self._find_all(Element('BOMB_TIMER_4')))
         points.update(self._find_all(Element('BOMB_TIMER_5')))
-        points.update(self._find_all(Element('BOMB_BOMBERMAN')))
+        points.update(self._find_all(Element('BOMB_HERO')))
         return list(points)
 
     def get_blasts(self):
@@ -100,7 +100,7 @@ class Board(AbstractBoard):
     def get_future_blasts(self):
         _bombs = set()
         _bombs.update(self.get_bombs())
-        _bombs.update(self._find_all(Element('OTHER_BOMB_BOMBERMAN')))
+        _bombs.update(self._find_all(Element('OTHER_BOMB_HERO')))
         _points = set()
         for _bomb in _bombs:
             _bx, _by = _bomb.get_x(), _bomb.get_y()
