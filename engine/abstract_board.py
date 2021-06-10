@@ -24,7 +24,20 @@
 
 from math import sqrt
 from engine.point import Point
-from games.bomberman.element import Element
+
+
+class Element:
+    def __init__(self, char):
+        self._char = char
+
+    def get_char(self):
+        return self._char
+
+    def __eq__(self, other):
+        return self.__str__() == other.__str__()
+
+    def __str__(self):
+        return self._char
 
 
 class AbstractBoard:
