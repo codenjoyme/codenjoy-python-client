@@ -24,27 +24,38 @@
 
 from math import sqrt
 from engine.point import Point
-from games.bomberman.element import Element
+
+
+class Element:
+    def __init__(self, char):
+        self._char = char
+
+    def get_char(self):
+        return self._char
+
+    def __eq__(self, other):
+        return self.__str__() == other.__str__()
+
+    def __str__(self):
+        return self._char
 
 
 class AbstractBoard:
-    BLAST_RANGE = 3
-
-    def __init__(self, board_string):
-        self._string = board_string.replace('\n', '')
-        self._len = len(self._string)
+    def __init__(self, raw_board):
+        self._content = raw_board.replace('\n', '')
+        self._len = len(self._content)
         self._size = int(sqrt(self._len))
 
     def _find_all(self, element):
         _points = []
         _a_char = element.get_char()
-        for i, c in enumerate(self._string):
+        for i, c in enumerate(self._content):
             if c == _a_char:
                 _points.append(self._strpos2pt(i))
         return _points
 
     def get_at(self, x, y):
-        return Element(self._string[self._xy2strpos(x, y)])
+        return Element(self._content[self._xy2strpos(x, y)])
 
     def is_at(self, x, y, element_object):
         return element_object == self.get_at(x, y)
@@ -70,10 +81,10 @@ class AbstractBoard:
         return Point(*self._strpos2xy(strpos))
 
     def _strpos2xy(self, strpos):
-        return (strpos % self._size, strpos // self._size)
+        return strpos % self._size, (self._size - strpos // self._size) - 1
 
     def _xy2strpos(self, x, y):
-        return self._size * y + x
+        return (self._size - 1 - y) * self._size + x
 
 
 if __name__ == '__main__':

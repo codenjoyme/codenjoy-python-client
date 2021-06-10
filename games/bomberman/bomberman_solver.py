@@ -23,7 +23,7 @@
 ###
 
 from engine.direction import Direction
-from games.bomberman.board import Board
+from games.bomberman.bomberman_board import BombermanBoard
 
 
 class BombermanSolver:
@@ -35,7 +35,7 @@ class BombermanSolver:
         self._count = 0
 
     def get(self, board_string):
-        self._board = Board(board_string)
+        self._board = BombermanBoard(board_string)
         print("Board \n{}".format(self._board.to_string()))
         _command = self.next_step()
         print("Answer: {}".format(_command))

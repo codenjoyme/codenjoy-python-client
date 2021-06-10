@@ -75,7 +75,7 @@ def value_of(char):
         raise ArgumentError("No such Element: {}".format(char))
 
 
-class Element:
+class BombermanElement:
     def __init__(self, n_or_c):
         for n, c in _ELEMENTS.items():
             if n_or_c == n or n_or_c == c:
@@ -84,10 +84,10 @@ class Element:
                 break
         else:
             raise ArgumentError("No such Element: {}".format(n_or_c))
-            
+
     def get_char(self):
         return self._char
-    
+
     def __eq__(self, otherElement):
         return (self._name == otherElement._name and
                 self._char == otherElement._char)
