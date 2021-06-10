@@ -42,14 +42,14 @@ class BombermanBoard(AbstractBoard):
                 )
 
     def _line_by_line(self):
-        return '\n'.join([self._string[i:i + self._size]
+        return '\n'.join([self._content[i:i + self._size]
                           for i in range(0, self._len, self._size)])
 
     def is_barrier_at(self, x, y):
         return Point(x, y) in self.get_barriers()
 
     def is_my_hero_dead(self):
-        return BombermanElement('DEAD_HERO').get_char() in self._string
+        return BombermanElement('DEAD_HERO').get_char() in self._content
 
     def get_hero(self):
         points = set()

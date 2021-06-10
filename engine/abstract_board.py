@@ -43,21 +43,21 @@ class Element:
 class AbstractBoard:
     BLAST_RANGE = 3
 
-    def __init__(self, board_string):
-        self._string = board_string.replace('\n', '')
-        self._len = len(self._string)
+    def __init__(self, raw_board):
+        self._content = raw_board.replace('\n', '')
+        self._len = len(self._content)
         self._size = int(sqrt(self._len))
 
     def _find_all(self, element):
         _points = []
         _a_char = element.get_char()
-        for i, c in enumerate(self._string):
+        for i, c in enumerate(self._content):
             if c == _a_char:
                 _points.append(self._strpos2pt(i))
         return _points
 
     def get_at(self, x, y):
-        return Element(self._string[self._xy2strpos(x, y)])
+        return Element(self._content[self._xy2strpos(x, y)])
 
     def is_at(self, x, y, element_object):
         return element_object == self.get_at(x, y)

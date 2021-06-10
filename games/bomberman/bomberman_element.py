@@ -84,10 +84,10 @@ class BombermanElement:
                 break
         else:
             raise ArgumentError("No such Element: {}".format(n_or_c))
-            
+
     def get_char(self):
         return self._char
-    
+
     def __eq__(self, otherElement):
         return (self._name == otherElement._name and
                 self._char == otherElement._char)
