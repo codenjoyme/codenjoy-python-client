@@ -83,10 +83,10 @@ class AbstractBoard:
         return Point(*self._strpos2xy(strpos))
 
     def _strpos2xy(self, strpos):
-        return (strpos % self._size, strpos // self._size)
+        return strpos % self._size, (self._size - strpos // self._size) - 1
 
     def _xy2strpos(self, x, y):
-        return self._size * y + x
+        return (self._size - 1 - y) * self._size + x
 
 
 if __name__ == '__main__':
