@@ -43,12 +43,9 @@ class Direction:
                 break
         else:
             raise ValueError("No Such Direction: {}".format(direction))
-        
+
     def __eq__(self, other):
         return self._name == other._name and self._dir == other._dir
-
-    def __ne__(self, other):
-        return self._name == other._name and self._dir != other._dir
 
     def is_null(self):
         return self._name == 'NULL'
@@ -58,7 +55,7 @@ class Direction:
 
     def get_x(self):
         return self._dir[1]
-    
+
     def get_y(self):
         return self._dir[2]
 
@@ -67,7 +64,7 @@ class Direction:
 
     def change_y(self, y):
         return y - self._dir[2]
-        
+
     def inverted(self):
         _inv_dir = None
         if self._name == 'LEFT':
