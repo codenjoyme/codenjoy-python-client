@@ -26,6 +26,7 @@ from games.bomberman.bomberman_element import BombermanElement
 
 
 class BombermanBoard(AbstractBoard):
+    BLAST_RANGE = 3
 
     def to_string(self):
         return ("{brd}\n\nHero at: {mbm}\nOther Heroes "
@@ -92,39 +93,40 @@ class BombermanBoard(AbstractBoard):
         points.update(self._find_all(BombermanElement('BOMB_TIMER_4')))
         points.update(self._find_all(BombermanElement('BOMB_TIMER_5')))
         points.update(self._find_all(BombermanElement('BOMB_HERO')))
+        points.update(self._find_all(BombermanElement('OTHER_BOMB_HERO')))
         return list(points)
 
     def get_blasts(self):
         return self._find_all(BombermanElement('BOOM'))
 
     def get_future_blasts(self):
-        _bombs = set()
-        _bombs.update(self.get_bombs())
-        _bombs.update(self._find_all(BombermanElement('OTHER_BOMB_HERO')))
         _points = set()
-        for _bomb in _bombs:
-            _bx, _by = _bomb.get_x(), _bomb.get_y()
-            _points.add(_bomb)
-            _points.update(self._search_blasts(_bomb))
-        return [_points]
-
-    def _search_blasts(self, bomb_point):
-        points = set()
-        walls = self.get_walls()
-
-        for search_range, is_x in ((range(bomb_point.get_x(), bomb_point.get_x() + self.BLAST_RANGE), True),
-                                   (range(bomb_point.get_x(), bomb_point.get_x() - self.BLAST_RANGE), True),
-                                   (range(bomb_point.get_y(), bomb_point.get_y() + self.BLAST_RANGE), False),
-                                   (range(bomb_point.get_y(), bomb_point.get_y() - self.BLAST_RANGE), False)):
-            for i in search_range:
-                current_point = Point(i, bomb_point.get_y()) if is_x else Point(bomb_point.get_x(), i)
-                if (current_point.is_bad(self._size) or
-                        current_point in walls):
+        for _bomb in self.get_bombs():
+            # right
+            for i in range(1, self.BLAST_RANGE + 1):
+                _point = Point(_bomb.get_x() + i, _bomb.get_y())
+                if _point.is_bad(self._size) or _point in self.get_barriers():
                     break
-                else:
-                    points.add(current_point)
-
-        return points
+                _points.add(_point)
+            # left
+            for i in range(1, self.BLAST_RANGE + 1):
+                _point = Point(_bomb.get_x() - i, _bomb.get_y())
+                if _point.is_bad(self._size) or _point in self.get_barriers():
+                    break
+                _points.add(_point)
+            # up
+            for i in range(1, self.BLAST_RANGE + 1):
+                _point = Point(_bomb.get_x(), _bomb.get_y() + i)
+                if _point.is_bad(self._size) or _point in self.get_barriers():
+                    break
+                _points.add(_point)
+            # down
+            for i in range(1, self.BLAST_RANGE + 1):
+                _point = Point(_bomb.get_x(), _bomb.get_y() - i)
+                if _point.is_bad(self._size) or _point in self.get_barriers():
+                    break
+                _points.add(_point)
+        return list(_points)
 
     def get_perks(self):
         points = set()

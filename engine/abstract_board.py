@@ -41,8 +41,6 @@ class Element:
 
 
 class AbstractBoard:
-    BLAST_RANGE = 3
-
     def __init__(self, raw_board):
         self._content = raw_board.replace('\n', '')
         self._len = len(self._content)
