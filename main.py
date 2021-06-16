@@ -25,7 +25,7 @@
 
 from sys import version_info
 from sys import argv
-from games.mollymage.mollymage_solver import BombermanSolver
+from games.mollymage.mollymage_solver import MollyMageSolver
 from engine.webclient import WebClient
 from urllib.parse import urlparse, parse_qs
 
@@ -55,7 +55,7 @@ def get_url_for_ws(url):
 
 def get_solver_for_ws(game):
     return {
-        "bomberman": BombermanSolver()
+        "bomberman": MollyMageSolver()
     }[game]
 
 

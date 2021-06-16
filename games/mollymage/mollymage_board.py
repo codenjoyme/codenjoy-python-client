@@ -22,10 +22,10 @@
 
 from engine.abstract_board import AbstractBoard
 from engine.point import Point
-from games.mollymage.mollymage_element import BombermanElement
+from games.mollymage.mollymage_element import MollyMageElement
 
 
-class BombermanBoard(AbstractBoard):
+class MollyMageBoard(AbstractBoard):
     BLAST_RANGE = 3
 
     def to_string(self):
@@ -50,25 +50,25 @@ class BombermanBoard(AbstractBoard):
         return Point(x, y) in self.get_barriers()
 
     def is_my_hero_dead(self):
-        return BombermanElement('DEAD_HERO').get_char() in self._content
+        return MollyMageElement('DEAD_HERO').get_char() in self._content
 
     def get_hero(self):
         points = set()
-        points.update(self._find_all(BombermanElement('HERO')))
-        points.update(self._find_all(BombermanElement('POTION_HERO')))
-        points.update(self._find_all(BombermanElement('DEAD_HERO')))
+        points.update(self._find_all(MollyMageElement('HERO')))
+        points.update(self._find_all(MollyMageElement('POTION_HERO')))
+        points.update(self._find_all(MollyMageElement('DEAD_HERO')))
         assert len(points) <= 1, "There should be only one hero"
         return list(points)[0]
 
     def get_other_heroes(self):
         points = set()
-        points.update(self._find_all(BombermanElement('OTHER_HERO')))
-        points.update(self._find_all(BombermanElement('OTHER_POTION_HERO')))
-        points.update(self._find_all(BombermanElement('OTHER_DEAD_HERO')))
+        points.update(self._find_all(MollyMageElement('OTHER_HERO')))
+        points.update(self._find_all(MollyMageElement('OTHER_POTION_HERO')))
+        points.update(self._find_all(MollyMageElement('OTHER_DEAD_HERO')))
         return list(points)
 
     def get_ghosts(self):
-        return self._find_all(BombermanElement('GHOST'))
+        return self._find_all(MollyMageElement('GHOST'))
 
     def get_barriers(self):
         points = set()
@@ -80,24 +80,24 @@ class BombermanBoard(AbstractBoard):
         return list(points)
 
     def get_walls(self):
-        return self._find_all(BombermanElement('WALL'))
+        return self._find_all(MollyMageElement('WALL'))
 
     def get_treasure_box(self):
-        return self._find_all(BombermanElement('TREASURE_BOX'))
+        return self._find_all(MollyMageElement('TREASURE_BOX'))
 
     def get_potions(self):
         points = set()
-        points.update(self._find_all(BombermanElement('POTION_TIMER_1')))
-        points.update(self._find_all(BombermanElement('POTION_TIMER_2')))
-        points.update(self._find_all(BombermanElement('POTION_TIMER_3')))
-        points.update(self._find_all(BombermanElement('POTION_TIMER_4')))
-        points.update(self._find_all(BombermanElement('POTION_TIMER_5')))
-        points.update(self._find_all(BombermanElement('POTION_HERO')))
-        points.update(self._find_all(BombermanElement('OTHER_POTION_HERO')))
+        points.update(self._find_all(MollyMageElement('POTION_TIMER_1')))
+        points.update(self._find_all(MollyMageElement('POTION_TIMER_2')))
+        points.update(self._find_all(MollyMageElement('POTION_TIMER_3')))
+        points.update(self._find_all(MollyMageElement('POTION_TIMER_4')))
+        points.update(self._find_all(MollyMageElement('POTION_TIMER_5')))
+        points.update(self._find_all(MollyMageElement('POTION_HERO')))
+        points.update(self._find_all(MollyMageElement('OTHER_POTION_HERO')))
         return list(points)
 
     def get_blasts(self):
-        return self._find_all(BombermanElement('BOOM'))
+        return self._find_all(MollyMageElement('BOOM'))
 
     def get_future_blasts(self):
         _points = set()
@@ -130,8 +130,8 @@ class BombermanBoard(AbstractBoard):
 
     def get_perks(self):
         points = set()
-        points.update(self._find_all(BombermanElement('POTION_BLAST_RADIUS_INCREASE')))
-        points.update(self._find_all(BombermanElement('POTION_COUNT_INCREASE')))
-        points.update(self._find_all(BombermanElement('POTION_IMMUNE')))
-        points.update(self._find_all(BombermanElement('POTION_REMOTE_CONTROL')))
+        points.update(self._find_all(MollyMageElement('POTION_BLAST_RADIUS_INCREASE')))
+        points.update(self._find_all(MollyMageElement('POTION_COUNT_INCREASE')))
+        points.update(self._find_all(MollyMageElement('POTION_IMMUNE')))
+        points.update(self._find_all(MollyMageElement('POTION_REMOTE_CONTROL')))
         return list(points)
