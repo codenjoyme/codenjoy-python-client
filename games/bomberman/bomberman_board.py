@@ -30,14 +30,14 @@ class BombermanBoard(AbstractBoard):
 
     def to_string(self):
         return ("{brd}\n\nHero at: {mbm}\nOther Heroes "
-                "at: {obm}\nMeat Choppers at: {mcp}\nDestroy Walls at:"
-                " {dwl}\nBombs at: {bmb}\nBlasts at: {bls}\nExpected "
+                "at: {obm}\nGhosts at: {mcp}\nTreasure boxes  at:"
+                " {dwl}\nPotions at: {bmb}\nBlasts at: {bls}\nExpected "
                 "Blasts at: {ebl}".format(brd=self._line_by_line(),
                                           mbm=self.get_hero(),
                                           obm=self.get_other_heroes(),
-                                          mcp=self.get_meat_choppers(),
-                                          dwl=self.get_destroy_walls(),
-                                          bmb=self.get_bombs(),
+                                          mcp=self.get_ghosts(),
+                                          dwl=self.get_treasure_box(),
+                                          bmb=self.get_potions(),
                                           bls=self.get_blasts(),
                                           ebl=self.get_future_blasts())
                 )
@@ -55,7 +55,7 @@ class BombermanBoard(AbstractBoard):
     def get_hero(self):
         points = set()
         points.update(self._find_all(BombermanElement('HERO')))
-        points.update(self._find_all(BombermanElement('BOMB_HERO')))
+        points.update(self._find_all(BombermanElement('POTION_HERO')))
         points.update(self._find_all(BombermanElement('DEAD_HERO')))
         assert len(points) <= 1, "There should be only one hero"
         return list(points)[0]
@@ -63,37 +63,37 @@ class BombermanBoard(AbstractBoard):
     def get_other_heroes(self):
         points = set()
         points.update(self._find_all(BombermanElement('OTHER_HERO')))
-        points.update(self._find_all(BombermanElement('OTHER_BOMB_HERO')))
+        points.update(self._find_all(BombermanElement('OTHER_POTION_HERO')))
         points.update(self._find_all(BombermanElement('OTHER_DEAD_HERO')))
         return list(points)
 
-    def get_meat_choppers(self):
-        return self._find_all(BombermanElement('MEAT_CHOPPER'))
+    def get_ghosts(self):
+        return self._find_all(BombermanElement('GHOST'))
 
     def get_barriers(self):
         points = set()
         points.update(self.get_walls())
-        points.update(self.get_bombs())
-        points.update(self.get_destroy_walls())
-        points.update(self.get_meat_choppers())
+        points.update(self.get_potions())
+        points.update(self.get_treasure_box())
+        points.update(self.get_ghosts())
         points.update(self.get_other_heroes())
         return list(points)
 
     def get_walls(self):
         return self._find_all(BombermanElement('WALL'))
 
-    def get_destroy_walls(self):
-        return self._find_all(BombermanElement('DESTROY_WALL'))
+    def get_treasure_box(self):
+        return self._find_all(BombermanElement('TREASURE_BOX'))
 
-    def get_bombs(self):
+    def get_potions(self):
         points = set()
-        points.update(self._find_all(BombermanElement('BOMB_TIMER_1')))
-        points.update(self._find_all(BombermanElement('BOMB_TIMER_2')))
-        points.update(self._find_all(BombermanElement('BOMB_TIMER_3')))
-        points.update(self._find_all(BombermanElement('BOMB_TIMER_4')))
-        points.update(self._find_all(BombermanElement('BOMB_TIMER_5')))
-        points.update(self._find_all(BombermanElement('BOMB_HERO')))
-        points.update(self._find_all(BombermanElement('OTHER_BOMB_HERO')))
+        points.update(self._find_all(BombermanElement('POTION_TIMER_1')))
+        points.update(self._find_all(BombermanElement('POTION_TIMER_2')))
+        points.update(self._find_all(BombermanElement('POTION_TIMER_3')))
+        points.update(self._find_all(BombermanElement('POTION_TIMER_4')))
+        points.update(self._find_all(BombermanElement('POTION_TIMER_5')))
+        points.update(self._find_all(BombermanElement('POTION_HERO')))
+        points.update(self._find_all(BombermanElement('OTHER_POTION_HERO')))
         return list(points)
 
     def get_blasts(self):
@@ -101,7 +101,7 @@ class BombermanBoard(AbstractBoard):
 
     def get_future_blasts(self):
         _points = set()
-        for _bomb in self.get_bombs():
+        for _bomb in self.get_potions():
             # right
             for i in range(1, self.BLAST_RANGE + 1):
                 _point = Point(_bomb.get_x() + i, _bomb.get_y())
@@ -130,8 +130,8 @@ class BombermanBoard(AbstractBoard):
 
     def get_perks(self):
         points = set()
-        points.update(self._find_all(BombermanElement('BOMB_BLAST_RADIUS_INCREASE')))
-        points.update(self._find_all(BombermanElement('BOMB_COUNT_INCREASE')))
-        points.update(self._find_all(BombermanElement('BOMB_IMMUNE')))
-        points.update(self._find_all(BombermanElement('BOMB_REMOTE_CONTROL')))
+        points.update(self._find_all(BombermanElement('POTION_BLAST_RADIUS_INCREASE')))
+        points.update(self._find_all(BombermanElement('POTION_COUNT_INCREASE')))
+        points.update(self._find_all(BombermanElement('POTION_IMMUNE')))
+        points.update(self._find_all(BombermanElement('POTION_REMOTE_CONTROL')))
         return list(points)
