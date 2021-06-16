@@ -22,7 +22,7 @@
 
 from engine.abstract_board import AbstractBoard
 from engine.point import Point
-from games.bomberman.bomberman_element import BombermanElement
+from games.bomberman.mollymage_element import BombermanElement
 
 
 class BombermanBoard(AbstractBoard):

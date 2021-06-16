@@ -23,7 +23,7 @@
 ###
 
 from engine.direction import Direction
-from games.bomberman.bomberman_board import BombermanBoard
+from games.bomberman.mollymage_board import BombermanBoard
 
 
 class BombermanSolver:

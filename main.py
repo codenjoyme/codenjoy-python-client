@@ -25,7 +25,7 @@
 
 from sys import version_info
 from sys import argv
-from games.bomberman.bomberman_solver import BombermanSolver
+from games.bomberman.mollymage_solver import BombermanSolver
 from engine.webclient import WebClient
 from urllib.parse import urlparse, parse_qs
 
