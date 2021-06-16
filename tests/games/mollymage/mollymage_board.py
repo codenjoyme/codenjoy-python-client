@@ -1,11 +1,11 @@
 import unittest
 
-from games.bomberman.bomberman_board import BombermanBoard
+from games.mollymage.mollymage_board import MollyMageBoard
 
 
 class BoardTest(unittest.TestCase):
     def test_get_future_blasts(self):
-        board = BombermanBoard(".☼☼.."
+        board = MollyMageBoard(".☼☼.."
                                ".3☼.."
                                ".☼..."
                                "..&2&"

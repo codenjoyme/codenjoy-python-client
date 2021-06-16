@@ -25,7 +25,7 @@
 
 from sys import version_info
 from sys import argv
-from games.bomberman.bomberman_solver import BombermanSolver
+from games.mollymage.mollymage_solver import MollyMageSolver
 from engine.webclient import WebClient
 from urllib.parse import urlparse, parse_qs
 
@@ -33,7 +33,7 @@ from urllib.parse import urlparse, parse_qs
 def main():
     assert version_info[0] == 3, "You should run me with Python 3.x"
 
-    game = "bomberman"
+    game = "mollymage"
     url = "http://localhost:8080/codenjoy-contest/board/player/0?code=000000000000"
     if len(argv) == 3:
         game = argv[1]
@@ -55,7 +55,7 @@ def get_url_for_ws(url):
 
 def get_solver_for_ws(game):
     return {
-        "bomberman": BombermanSolver()
+        "mollymage": MollyMageSolver()
     }[game]
 
 

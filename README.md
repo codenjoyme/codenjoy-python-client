@@ -13,7 +13,7 @@ def main():
 ```python
 def main():
     ...
-    game = "bomberman"
+    game = "mollymage"
     ...
 ```
 
