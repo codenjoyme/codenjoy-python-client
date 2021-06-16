@@ -1,6 +1,6 @@
 import unittest
 
-from games.bomberman.mollymage_board import BombermanBoard
+from games.mollymage.mollymage_board import BombermanBoard
 
 
 class BoardTest(unittest.TestCase):
