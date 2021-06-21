@@ -23,10 +23,10 @@
 ###
 
 from engine.direction import Direction
-from games.mollymage.mollymage_board import MollyMageBoard
+from games.mollymage.board import Board
 
 
-class MollyMageSolver:
+class Solver:
 
     def __init__(self):
         self._direction = None
@@ -35,7 +35,7 @@ class MollyMageSolver:
         self._count = 0
 
     def get(self, board_string):
-        self._board = MollyMageBoard(board_string)
+        self._board = Board(board_string)
         print("Board \n{}".format(self._board.to_string()))
         _command = self.next_step()
         print("Answer: {}".format(_command))

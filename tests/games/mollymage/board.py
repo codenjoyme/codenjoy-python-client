@@ -1,8 +1,8 @@
 import unittest
 
-from games.mollymage.mollymage_board import MollyMageBoard
+from games.mollymage.board import Board
 
-board = MollyMageBoard(
+board = Board(
     "☼☼☼☼☼☼☼☼☼"
     "☼1 ♣   ♠☼"
     "☼#2  &  ☼"

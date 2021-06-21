@@ -22,10 +22,10 @@
 
 from engine.abstract_board import AbstractBoard
 from engine.point import Point
-from games.mollymage.mollymage_element import MollyMageElement
+from games.mollymage.element import Element
 
 
-class MollyMageBoard(AbstractBoard):
+class Board(AbstractBoard):
     BLAST_RANGE = 3
 
     def _line_by_line(self):
@@ -33,22 +33,22 @@ class MollyMageBoard(AbstractBoard):
                           for i in range(0, self._len, self._size)])
 
     def is_my_hero_dead(self):
-        return MollyMageElement('DEAD_HERO').get_char() in self._content
+        return Element('DEAD_HERO').get_char() in self._content
 
     def get_hero(self):
         points = set()
-        points.update(self.get(MollyMageElement('HERO')))
-        points.update(self.get(MollyMageElement('POTION_HERO')))
-        points.update(self.get(MollyMageElement('DEAD_HERO')))
+        points.update(self.get(Element('HERO')))
+        points.update(self.get(Element('POTION_HERO')))
+        points.update(self.get(Element('DEAD_HERO')))
         return list(points)[0]
 
     def get_other_heroes(self):
-        return self.get(MollyMageElement('OTHER_HERO'),
-                        MollyMageElement('OTHER_POTION_HERO'),
-                        MollyMageElement('OTHER_DEAD_HERO'))
+        return self.get(Element('OTHER_HERO'),
+                        Element('OTHER_POTION_HERO'),
+                        Element('OTHER_DEAD_HERO'))
 
     def get_ghosts(self):
-        return self.get(MollyMageElement('GHOST'))
+        return self.get(Element('GHOST'))
 
     def get_movement_barriers(self):
         points = set()
@@ -60,29 +60,29 @@ class MollyMageBoard(AbstractBoard):
         return list(points)
 
     def get_blast_barriers(self):
-        return self.get(MollyMageElement('WALL'), MollyMageElement('TREASURE_BOX'))
+        return self.get(Element('WALL'), Element('TREASURE_BOX'))
 
     def get_walls(self):
-        return self.get(MollyMageElement('WALL'))
+        return self.get(Element('WALL'))
 
     def get_treasure_box(self):
-        return self.get(MollyMageElement('TREASURE_BOX'))
+        return self.get(Element('TREASURE_BOX'))
 
     def get_potions(self):
-        return self.get(MollyMageElement('POTION_TIMER_1'),
-                        MollyMageElement('POTION_TIMER_2'),
-                        MollyMageElement('POTION_TIMER_3'),
-                        MollyMageElement('POTION_TIMER_4'),
-                        MollyMageElement('POTION_TIMER_5'),
-                        MollyMageElement('POTION_HERO'),
-                        MollyMageElement('OTHER_POTION_HERO'))
+        return self.get(Element('POTION_TIMER_1'),
+                        Element('POTION_TIMER_2'),
+                        Element('POTION_TIMER_3'),
+                        Element('POTION_TIMER_4'),
+                        Element('POTION_TIMER_5'),
+                        Element('POTION_HERO'),
+                        Element('OTHER_POTION_HERO'))
 
     def get_blasts(self):
-        return self.get(MollyMageElement('BOOM'))
+        return self.get(Element('BOOM'))
 
     def get_future_blasts(self):
         _points = set()
-        for _potion in self.get(MollyMageElement('POTION_TIMER_1')):
+        for _potion in self.get(Element('POTION_TIMER_1')):
             _points.add(Point(_potion.get_x(), _potion.get_y()))
             # right
             for i in range(1, self.BLAST_RANGE + 1):
@@ -112,10 +112,10 @@ class MollyMageBoard(AbstractBoard):
 
     def get_perks(self):
         points = set()
-        points.update(self.get(MollyMageElement('POTION_BLAST_RADIUS_INCREASE')))
-        points.update(self.get(MollyMageElement('POTION_COUNT_INCREASE')))
-        points.update(self.get(MollyMageElement('POTION_IMMUNE')))
-        points.update(self.get(MollyMageElement('POTION_REMOTE_CONTROL')))
+        points.update(self.get(Element('POTION_BLAST_RADIUS_INCREASE')))
+        points.update(self.get(Element('POTION_COUNT_INCREASE')))
+        points.update(self.get(Element('POTION_IMMUNE')))
+        points.update(self.get(Element('POTION_REMOTE_CONTROL')))
         return list(points)
 
     def to_string(self):
