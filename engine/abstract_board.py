@@ -46,36 +46,52 @@ class AbstractBoard:
         self._len = len(self._content)
         self._size = int(sqrt(self._len))
 
-    def _find_all(self, element):
-        _points = []
-        _a_char = element.get_char()
-        for i, c in enumerate(self._content):
-            if c == _a_char:
-                _points.append(self._strpos2pt(i))
-        return _points
-
     def get_at(self, x, y):
         return Element(self._content[self._xy2strpos(x, y)])
 
-    def is_at(self, x, y, element_object):
-        return element_object == self.get_at(x, y)
+    def get(self, *elements):
+        _points = []
+        for x in range(0, self._size):
+            for y in range(0, self._size):
+                for e in elements:
+                    if self.get_at(x, y).get_char() == e.get_char():
+                        _points.append(Point(x, y))
+        return _points
 
-    def is_near(self, x, y, elem):
-        _is_near = False
-        if not Point(x, y).is_bad(self._size):
-            _is_near = (self.is_at(x + 1, y, elem) or
-                        self.is_at(x - 1, y, elem) or
-                        self.is_at(x, 1 + y, elem) or
-                        self.is_at(x, 1 - y, elem))
-        return _is_near
+    def get_first(self, *elements):
+        for x in range(0, self._size):
+            for y in range(0, self._size):
+                for e in elements:
+                    if self.get_at(x, y).get_char() == e.get_char():
+                        return Point(x, y)
+        return None
 
-    def count_near(self, x, y, elem):
-        _near_count = 0
-        if not Point(x, y).is_bad(self._size):
-            for _x, _y in ((x + 1, y), (x - 1, y), (x, 1 + y), (x, 1 - y)):
-                if self.is_at(_x, _y, elem):
-                    _near_count += 1
-        return _near_count
+    def is_at(self, x, y, *elements):
+        if Point(x, y).is_bad(self._size):
+            return False
+        return self.get_at(x, y) in elements
+
+    def get_near(self, x, y):
+        _elements = []
+        if not Point(x + 1, y).is_bad(self._size):
+            _elements.append(self.get_at(x + 1, y))
+        if not Point(x - 1, y).is_bad(self._size):
+            _elements.append(self.get_at(x - 1, y))
+        if not Point(x, y + 1).is_bad(self._size):
+            _elements.append(self.get_at(x, y + 1))
+        if not Point(x, y - 1).is_bad(self._size):
+            _elements.append(self.get_at(x, y - 1))
+        return _elements
+
+    def is_near(self, x, y, element):
+        return element in self.get_near(x, y)
+
+    def count_near(self, x, y, element):
+        count = 0
+        for e in self.get_near(x, y):
+            if element.get_char() == e.get_char():
+                count += 1
+        return count
 
     def _strpos2pt(self, strpos):
         return Point(*self._strpos2xy(strpos))
