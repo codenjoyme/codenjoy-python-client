@@ -76,7 +76,7 @@ def value_of(char):
         raise ArgumentError("No such Element: {}".format(char))
 
 
-class MollyMageElement:
+class Element:
     def __init__(self, n_or_c):
         for n, c in _ELEMENTS.items():
             if n_or_c == n or n_or_c == c:
