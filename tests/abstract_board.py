@@ -5,21 +5,6 @@ from engine.point import Point
 
 
 class AbstractBoardTest(unittest.TestCase):
-    def test_find_all(self):
-        board = AbstractBoard(".a."
-                              ".aa"
-                              "...")
-
-        points = board._find_all(Element("a"))
-        expected = "[1,2][1,1][2,1]"
-        actual = ''.join(str(p) for p in points)
-        self.assertEqual(expected, actual)
-
-        points = board._find_all(Element("b"))
-        expected = ""
-        actual = ''.join(str(p) for p in points)
-        self.assertEqual(expected, actual)
-
     def test_get_at(self):
         board = AbstractBoard("aaa"
                               "bbb"
@@ -37,12 +22,34 @@ class AbstractBoardTest(unittest.TestCase):
         self.assertEqual("c", str(board.get_at(1, 0)))
         self.assertEqual("c", str(board.get_at(2, 0)))
 
+    def test_get(self):
+        board = AbstractBoard(".a."
+                              ".aa"
+                              "...")
+
+        points = board.get(Element("a"))
+        expected = "[1,1][1,2][2,1]"
+        actual = ''.join(str(p) for p in points)
+        self.assertEqual(expected, actual)
+
+        points = board.get(Element("b"))
+        expected = ""
+        actual = ''.join(str(p) for p in points)
+        self.assertEqual(expected, actual)
+
     def test_is_at(self):
         board = AbstractBoard("..."
                               ".?."
                               "...")
         self.assertEqual(True, board.is_at(1, 1, '?'))
         self.assertEqual(False, board.is_at(1, 1, '.'))
+
+    def test_get_near(self):
+        board = AbstractBoard("abc"
+                              "def"
+                              "ghi")
+        elements_near = board.get_near(1, 1)
+        self.assertEqual("fdbh", ''.join(str(e) for e in elements_near))
 
     def test_is_near(self):
         board = AbstractBoard(".?."
@@ -69,9 +76,9 @@ class AbstractBoardTest(unittest.TestCase):
         board = AbstractBoard(".?."
                               "..?"
                               ".?.")
-        self.assertEqual(3, board.count_near(1, 1, '?'))
-        self.assertEqual(0, board.count_near(-1, -1, '?'))
-        self.assertEqual(0, board.count_near(1, 1, '#'))
+        self.assertEqual(3, board.count_near(1, 1, Element('?')))
+        self.assertEqual(0, board.count_near(-1, -1, Element('?')))
+        self.assertEqual(0, board.count_near(1, 1, Element('#')))
 
     def test_strpos2pt(self):
         board = AbstractBoard(".?."

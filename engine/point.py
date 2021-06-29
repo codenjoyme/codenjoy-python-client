@@ -40,6 +40,12 @@ class Point:
     def __eq__(self, other_point):
         return self.__key() == other_point.__key()
 
+    def __lt__(self, other):
+        return (self._x, self._y) < (other._x, other._y)
+
+    def __gt__(self, other):
+        return (self._x, self._y) > (other._x, other._y)
+
     def __hash__(self):
         return hash(self.__key())
 
