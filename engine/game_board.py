@@ -30,6 +30,7 @@ from engine.point import Point
 
 class GameBoard:
     def __init__(self, supported_elements, message):
+        message = message.replace("board=", "")
         self._elements = self.__init_elements_array(supported_elements, message)
         self._len = len(self._elements)
         self._size = int(sqrt(self._len))
@@ -37,8 +38,8 @@ class GameBoard:
     def __init_elements_array(self, supported_elements, message):
         _elements = []
         for next_element in message:
-            if next_element not in supported_elements.values():
-                raise ValueError("invalid element: " + next_element)
+            if next_element not in supported_elements:
+                raise ValueError("invalid element: " + str(next_element))
             else:
                 _elements.append(next_element)
         return _elements
@@ -48,16 +49,15 @@ class GameBoard:
 
     def get_at(self, pt):
         if not pt.is_valid(self._size):
-            raise ValueError("invalid point: " + pt)
+            raise ValueError("invalid point: " + str(pt))
         return self._elements[self.__point_to_index(pt)]
 
     def find(self, *wanted):
-        _points = []
+        _points = set()
         for i in range(0, self._len):
             if self._elements[i] in wanted:
-                _points.append(self.__index_to_point(i))
-        # usort?
-        return _points
+                _points.add(self.__index_to_point(i))
+        return sorted(_points)
 
     def find_first(self, *wanted):
         for i in range(0, self._len):

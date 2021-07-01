@@ -30,7 +30,7 @@ class Board:
     BLAST_RANGE = 3
 
     def __init__(self, message):
-        self._board = GameBoard(elements, message)
+        self._board = GameBoard(elements.values(), message)
 
     def get_at(self, pt):
         if not pt.is_valid(self._board.get_size()):
@@ -45,7 +45,7 @@ class Board:
         )
         if len(points) == 0:
             raise ValueError("hero element has not been found")
-        return points[0]
+        return points.__iter__().__next__()
 
     def is_game_over(self):
         return self._board.find_first(elements.get('DEAD_HERO')) is not None
@@ -65,8 +65,7 @@ class Board:
         points.update(self.find_treasure_boxes())
         points.update(self.find_potions())
         points.update(self.find_other_heroes())
-        # usort?
-        return list(points)
+        return sorted(points)
 
     def find_walls(self):
         return self._board.find(elements.get('WALL'))
@@ -91,7 +90,7 @@ class Board:
 
     def predict_future_blasts(self):
         # TODO: implement
-        return list()
+        return []
 
     def find_perks(self):
         return self._board.find(elements.get('POTION_COUNT_INCREASE'),
@@ -101,12 +100,12 @@ class Board:
 
     def __str__(self):
         return self._board.__str__() + \
-               "\nHero at: " + str(self.find_hero()) + \
-               "\nOther heroes at: " + str(self.find_other_heroes()) + \
-               "\nGhosts at: " + str(self.find_ghosts()) + \
-               "\nPotions at: " + str(self.find_potions()) + \
-               "\nBlasts at: " + str(self.find_blasts()) + \
-               "\nExpected blasts at: " + str(self.predict_future_blasts())
+               "\nHero at: " + repr(self.find_hero()) + \
+               "\nOther heroes at: " + repr(self.find_other_heroes()) + \
+               "\nGhosts at: " + repr(self.find_ghosts()) + \
+               "\nPotions at: " + repr(self.find_potions()) + \
+               "\nBlasts at: " + repr(self.find_blasts()) + \
+               "\nExpected blasts at: " + repr(self.predict_future_blasts())
 
 
 if __name__ == '__main__':

@@ -38,7 +38,7 @@ class Point:
         return self._y
 
     def is_valid(self, board_size):
-        return (self._x >= 0 & self._x <= board_size) & (self._y >= 0 & self._y <= board_size)
+        return (0 <= self._x <= board_size) and (0 <= self._y <= board_size)
 
     def __lt__(self, other):
         return (self.x(), self.y()) < (other.x(), other.y())
