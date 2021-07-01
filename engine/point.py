@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
 ###
 # #%L
@@ -31,35 +31,31 @@ class Point:
     def __key(self):
         return self._x, self._y
 
-    def __str__(self):
-        return self.to_string()
+    def x(self):
+        return self._x
 
-    def __repr__(self):
-        return self.to_string()
+    def y(self):
+        return self._y
+
+    def is_valid(self, board_size):
+        return (self._x >= 0 & self._x <= board_size) & (self._y >= 0 & self._y <= board_size)
+
+    def __lt__(self, other):
+        return (self.x(), self.y()) < (other.x(), other.y())
+
+    def __gt__(self, other):
+        return (self._x, self._y) > (other.x(), other.y())
 
     def __eq__(self, other_point):
         return self.__key() == other_point.__key()
 
-    def __lt__(self, other):
-        return (self._x, self._y) < (other._x, other._y)
-
-    def __gt__(self, other):
-        return (self._x, self._y) > (other._x, other._y)
-
     def __hash__(self):
         return hash(self.__key())
 
-    def get_x(self):
-        return self._x
+    def __repr__(self):
+        return str(self)
 
-    def get_y(self):
-        return self._y
-
-    def is_bad(self, board_size):
-        return (self._x > board_size or self._x < 0 or
-                self._y > board_size or self._y < 0)
-
-    def to_string(self):
+    def __str__(self):
         return "[{},{}]".format(self._x, self._y)
 
 

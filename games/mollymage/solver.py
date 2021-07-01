@@ -22,30 +22,24 @@
 # #L%
 ###
 
-from engine.direction import Direction
+from engine.game_solver import GameSolver
+from games.mollymage.action import Action
 from games.mollymage.board import Board
 
 
-class Solver:
+class Solver(GameSolver):
 
-    def __init__(self):
-        self._direction = None
-        self._board = None
-        self._last = None
-        self._count = 0
-
-    def get(self, board_string):
-        self._board = Board(board_string)
-        print("Board \n{}".format(self._board.to_string()))
-        _command = self.next_step()
-        print("Answer: {}".format(_command))
+    def answer(self, message):
+        board = Board(message)
+        print("Board \n" + board.__str__())
+        action = self.__next_action()
+        print("\nAnswer: " + action.__str__())
         print("-------------------------------------------------------------")
+        return action.__str__()
 
-        return _command
-
-    def next_step(self):
-        # make your action
-        return Direction('ACT').to_string()
+    def __next_action(self):
+        # TODO: write your code here
+        return Action.ACT
 
 
 if __name__ == '__main__':

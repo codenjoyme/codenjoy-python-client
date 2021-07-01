@@ -827,7 +827,7 @@ class WebSocketApp(object):
             time.sleep(interval)
             self.sock.ping()
 
-    def run_forever(self, sockopt=None, sslopt=None, ping_interval=0):
+    def run(self, sockopt=None, sslopt=None, ping_interval=0):
         """
         run event loop for WebSocket framework.
         This loop is infinite loop and is alive during websocket is available.

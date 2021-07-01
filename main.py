@@ -22,40 +22,26 @@
 # #L%
 ###
 
-
-from sys import version_info
 from sys import argv
-from games.mollymage.solver import Solver
-from engine.webclient import WebClient
-from urllib.parse import urlparse, parse_qs
+
+import games.mollymage.solver
+from engine.web_socket_runner import WebSocketRunner
 
 
 def main():
-    assert version_info[0] == 3, "You should run me with Python 3.x"
-
     game = "mollymage"
     url = "http://localhost:8080/codenjoy-contest/board/player/0?code=000000000000"
     if len(argv) == 3:
         game = argv[1]
         url = argv[2]
 
-    wcl = WebClient(url=get_url_for_ws(url), solver=get_solver_for_ws(game))
-    wcl.run_forever()
+    solver = determine_game_solver(game)
+    WebSocketRunner(url, solver).run()
 
 
-def get_url_for_ws(url):
-    parsed_url = urlparse(url)
-    query = parse_qs(parsed_url.query)
-
-    return "{}://{}/codenjoy-contest/ws?user={}&code={}".format('ws' if parsed_url.scheme == 'http' else 'wss',
-                                                                parsed_url.netloc,
-                                                                parsed_url.path.split('/')[-1],
-                                                                query['code'][0])
-
-
-def get_solver_for_ws(game):
+def determine_game_solver(game):
     return {
-        "mollymage": Solver()
+        "mollymage": games.mollymage.solver.Solver()
     }[game]
 
 

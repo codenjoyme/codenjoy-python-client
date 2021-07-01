@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 ###
 # #%L
 # Codenjoy - it's a dojo-like platform from developers to developers.
@@ -20,118 +22,92 @@
 # #L%
 ###
 
-from engine.abstract_board import AbstractBoard
-from engine.point import Point
-from games.mollymage.element import Element
+from engine.game_board import GameBoard
+from games.mollymage.element import elements
 
 
-class Board(AbstractBoard):
+class Board:
     BLAST_RANGE = 3
 
-    def _line_by_line(self):
-        return '\n'.join([self._content[i:i + self._size]
-                          for i in range(0, self._len, self._size)])
+    def __init__(self, message):
+        self._board = GameBoard(elements, message)
 
-    def is_my_hero_dead(self):
-        return Element('DEAD_HERO').get_char() in self._content
+    def get_at(self, pt):
+        if not pt.is_valid(self._board.get_size()):
+            return elements.get('WALL')
+        return self._board.get_at(pt)
 
-    def get_hero(self):
-        points = set()
-        points.update(self.get(Element('HERO')))
-        points.update(self.get(Element('POTION_HERO')))
-        points.update(self.get(Element('DEAD_HERO')))
-        return list(points)[0]
+    def find_hero(self):
+        points = self._board.find(
+            elements.get('HERO'),
+            elements.get('POTION_HERO'),
+            elements.get('DEAD_HERO'),
+        )
+        if len(points) == 0:
+            raise ValueError("hero element has not been found")
+        return points[0]
 
-    def get_other_heroes(self):
-        return self.get(Element('OTHER_HERO'),
-                        Element('OTHER_POTION_HERO'),
-                        Element('OTHER_DEAD_HERO'))
+    def is_game_over(self):
+        return self._board.find_first(elements.get('DEAD_HERO')) is not None
+
+    def find_other_heroes(self):
+        return self._board.find(elements.get('OTHER_HERO'),
+                                elements.get('OTHER_POTION_HERO'),
+                                elements.get('OTHER_DEAD_HERO'))
 
     def get_ghosts(self):
-        return self.get(Element('GHOST'))
+        return self._board.find(elements.get('GHOST'))
 
-    def get_movement_barriers(self):
+    def find_barriers(self):
         points = set()
-        points.update(self.get_other_heroes())
-        points.update(self.get_walls())
-        points.update(self.get_potions())
-        points.update(self.get_treasure_box())
-        points.update(self.get_ghosts())
+        points.update(self.find_walls())
+        points.update(self.find_ghosts())
+        points.update(self.find_treasure_boxes())
+        points.update(self.find_potions())
+        points.update(self.find_other_heroes())
+        # usort?
         return list(points)
 
-    def get_blast_barriers(self):
-        return self.get(Element('WALL'), Element('TREASURE_BOX'))
+    def find_walls(self):
+        return self._board.find(elements.get('WALL'))
 
-    def get_walls(self):
-        return self.get(Element('WALL'))
+    def find_ghosts(self):
+        return self._board.find(elements.get('GHOST'))
 
-    def get_treasure_box(self):
-        return self.get(Element('TREASURE_BOX'))
+    def find_treasure_boxes(self):
+        return self._board.find(elements.get('TREASURE_BOX'))
 
-    def get_potions(self):
-        return self.get(Element('POTION_TIMER_1'),
-                        Element('POTION_TIMER_2'),
-                        Element('POTION_TIMER_3'),
-                        Element('POTION_TIMER_4'),
-                        Element('POTION_TIMER_5'),
-                        Element('POTION_HERO'),
-                        Element('OTHER_POTION_HERO'))
+    def find_potions(self):
+        return self._board.find(elements.get('POTION_TIMER_1'),
+                                elements.get('POTION_TIMER_2'),
+                                elements.get('POTION_TIMER_3'),
+                                elements.get('POTION_TIMER_4'),
+                                elements.get('POTION_TIMER_5'),
+                                elements.get('POTION_HERO'),
+                                elements.get('OTHER_POTION_HERO'))
 
-    def get_blasts(self):
-        return self.get(Element('BOOM'))
+    def find_blasts(self):
+        return self._board.find(elements.get('BOOM'))
 
-    def get_future_blasts(self):
-        _points = set()
-        for _potion in self.get(Element('POTION_TIMER_1')):
-            _points.add(Point(_potion.get_x(), _potion.get_y()))
-            # right
-            for i in range(1, self.BLAST_RANGE + 1):
-                _point = Point(_potion.get_x() + i, _potion.get_y())
-                if _point.is_bad(self._size) or _point in self.get_blast_barriers():
-                    break
-                _points.add(_point)
-            # left
-            for i in range(1, self.BLAST_RANGE + 1):
-                _point = Point(_potion.get_x() - i, _potion.get_y())
-                if _point.is_bad(self._size) or _point in self.get_blast_barriers():
-                    break
-                _points.add(_point)
-            # up
-            for i in range(1, self.BLAST_RANGE + 1):
-                _point = Point(_potion.get_x(), _potion.get_y() + i)
-                if _point.is_bad(self._size) or _point in self.get_blast_barriers():
-                    break
-                _points.add(_point)
-            # down
-            for i in range(1, self.BLAST_RANGE + 1):
-                _point = Point(_potion.get_x(), _potion.get_y() - i)
-                if _point.is_bad(self._size) or _point in self.get_blast_barriers():
-                    break
-                _points.add(_point)
-        return sorted(_points)
+    def predict_future_blasts(self):
+        # TODO: implement
+        return list()
 
-    def get_perks(self):
-        points = set()
-        points.update(self.get(Element('POTION_BLAST_RADIUS_INCREASE')))
-        points.update(self.get(Element('POTION_COUNT_INCREASE')))
-        points.update(self.get(Element('POTION_IMMUNE')))
-        points.update(self.get(Element('POTION_REMOTE_CONTROL')))
-        return list(points)
+    def find_perks(self):
+        return self._board.find(elements.get('POTION_COUNT_INCREASE'),
+                                elements.get('POTION_REMOTE_CONTROL'),
+                                elements.get('POTION_IMMUNE'),
+                                elements.get('POTION_BLAST_RADIUS_INCREASE'))
 
-    def to_string(self):
-        return ("{brd}\n"
-                "\n"
-                "Hero at: {mbm}\n"
-                "Other heroes at: {obm}\n"
-                "Ghosts at: {mcp}\n"
-                "Treasure boxes at: {dwl}\n"
-                "Potions at: {bmb}\n"
-                "Blasts at: {bls}\n"
-                "Expected blasts at: {ebl}".format(brd=self._line_by_line(),
-                                                   mbm=self.get_hero(),
-                                                   obm=self.get_other_heroes(),
-                                                   mcp=self.get_ghosts(),
-                                                   dwl=self.get_treasure_box(),
-                                                   bmb=self.get_potions(),
-                                                   bls=self.get_blasts(),
-                                                   ebl=self.get_future_blasts()))
+    def __str__(self):
+        return self._board.__str__() + \
+               "\nHero at: " + str(self.find_hero()) + \
+               "\nOther heroes at: " + str(self.find_other_heroes()) + \
+               "\nGhosts at: " + str(self.find_ghosts()) + \
+               "\nPotions at: " + str(self.find_potions()) + \
+               "\nBlasts at: " + str(self.find_blasts()) + \
+               "\nExpected blasts at: " + str(self.predict_future_blasts())
+
+
+if __name__ == '__main__':
+    raise RuntimeError("This module is not intended to be ran from CLI")

@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 
 ###
 # #%L
@@ -22,9 +22,7 @@
 # #L%
 ###
 
-from argparse import ArgumentError
-
-_ELEMENTS = dict(
+elements = dict(
 
     # your Molly
     HERO = b'\xe2\x98\xba'.decode(),                    # '☺' - This is what she usually looks like
@@ -66,33 +64,6 @@ _ELEMENTS = dict(
     # Space
     NONE = ' '                                          # ' ' - This is the only place where you can move your Molly.
 )
-
-
-def value_of(char):
-    for value, c in _ELEMENTS.items():
-        if char == c:
-            return value
-    else:
-        raise ArgumentError("No such Element: {}".format(char))
-
-
-class Element:
-    def __init__(self, n_or_c):
-        for n, c in _ELEMENTS.items():
-            if n_or_c == n or n_or_c == c:
-                self._name = n
-                self._char = c
-                break
-        else:
-            raise ArgumentError("No such Element: {}".format(n_or_c))
-
-    def get_char(self):
-        return self._char
-
-    def __eq__(self, otherElement):
-        return (self._name == otherElement._name and
-                self._char == otherElement._char)
-
 
 if __name__ == '__main__':
     raise RuntimeError("This module is not intended to be ran from CLI")
