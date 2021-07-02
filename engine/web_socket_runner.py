@@ -33,30 +33,26 @@ class WebSocketRunner(WebSocketApp):
                  on_close=None, keep_running=True, get_mask_key=None):
         self._token = url_to_wstoken(url)
         self._solver = solver
-        super().__init__(self._token, [], _on_open, _on_message, _on_error, _on_close)
+        super().__init__(self._token, [], self._on_open, self._on_message, self._on_error, self._on_close)
 
+    def _on_open(self, webclient):
+        print("websocket connection successfully established")
 
-def _on_open(webclient):
-    print("websocket connection successfully established")
+    def _on_message(self, webclient, msg_from_server):
+        try:
+            solver = webclient._solver
+            msg_to_server = solver.answer(msg_from_server)
+            webclient.send(msg_to_server)
+        except Exception as e:
+            print("Exception occurred")
+            print(e)
+            print_exception(*exc_info())
 
+    def _on_error(self, webclient, error):
+        print("websocket connection error " + error)
 
-def _on_message(webclient, msg_from_server):
-    try:
-        solver = webclient._solver
-        msg_to_server = solver.answer(msg_from_server)
-        webclient.send(msg_to_server)
-    except Exception as e:
-        print("Exception occurred")
-        print(e)
-        print_exception(*exc_info())
-
-
-def _on_error(webclient, error):
-    print("websocket connection error " + error)
-
-
-def _on_close(webclient):
-    print("websocket connection has been closed")
+    def _on_close(self, webclient):
+        print("websocket connection has been closed")
 
 
 def url_to_wstoken(url):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from engine.web_socket_runner import WebSocketRunner, url_to_wstoken
+from engine.web_socket_runner import url_to_wstoken
 
 
 class TestWebSocketRunner(TestCase):
