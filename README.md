@@ -12,24 +12,24 @@ The entry point for starting a project is `main()` func in `main.py`. \
 You can pass the game type and token connection to the server as command-line arguments.
 Game parameters passed by arguments at startup have a higher priority than those defined in the code.
 
-The archive is run with the command `python3 main.py [<game>] [<url>]`
+To run scripts you need to execute a command `python3 main.py [<game>] [<url>]`
 
 # How does it work?
 The elements on the map are defined in `games/<gamename>/element.py`. They determine the meaning of a particular symbol.
-The two important components of the game are the `games/<gamename>/board.[py]` game board
+The two important components of the game are the `games/<gamename>/board.py` game board
 and the `games/<gamename>/solver.py` solver.
 
 Every second the server sends a string representation of the current state of the board, which is parsed in an object of class `Board`.
-Then the server expects a string representation of your bot's action that is computed by executing `Solver.get(board_string)`.
+Then the server expects a string representation of your bot's action that is computed by executing `Solver.answer(message)`.
 
 Using the set of available methods of the `Board` class, you improve the algorithm of the bot's behavior.
 You should develop this class, extending it with new methods that will be your tool in the fight.
-For example, a bot can get information about an element in a specific coordinate by calling `AbstractBoard.get_at(x, y)`
-or count the number of elements of a certain type near the coordinate by calling `AbstractBoard.cout_near(x, y, elem)`, etc.
+For example, a bot can get information about an element in a specific coordinate by calling `GameBoard.get_at(pt)`
+or count the number of elements of a certain type near the coordinate by calling `GameBoard.cout_near(pt, elem)`, etc.
 
 # Business logic testing
 Writing tests will allow you to create conclusive evidence of the correctness of the existing code.
 This is your faithful friend, who is always ready to answer the question: "Is everything working as I expect? The new code did not break my existing logic?". \
-The `tests/abstract_board.py` file contains a set of tests that check board tools.
+The `tests/test_board.py` file contains a set of tests that check board tools.
 Implementation of new methods should be accompanied by writing new tests and checking the results of processing existing ones. \
-Use `tests/games/<gamename>/solver.py` to check the bot's behavior for a specific game scenario.
+Use `tests/games/<gamename>/test_solver.py` to check the bot's behavior for a specific game scenario.
