@@ -14,6 +14,7 @@ class TestGameBoard(TestCase):
 
     def test_valid_message_and_supported_elements(self):
         board = GameBoard(["a", "b", "c"], "aaa" + "bbb" + "ccc")
+        self.assertEqual("aaa\nbbb\nccc\n", board.__str__())
 
     def test_erase_message_prefix(self):
         board = GameBoard(["a", "b", "c"], "board=" + "aaa" + "bbb" + "ccc")

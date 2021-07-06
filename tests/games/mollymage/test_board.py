@@ -46,11 +46,11 @@ class TestBoard(TestCase):
              Point(2, 0), Point(2, 1), Point(2, 2)],
             board.find_barriers())
 
-    def test_walls(self):
+    def test_find_walls(self):
         board = Board("###" + "☼##" + "☼##")
         self.assertEquals([Point(0, 0), Point(0, 1)], board.find_walls())
 
-    def test_ghosts(self):
+    def test_find_ghosts(self):
         board = Board("##&" + "##&" + "###")
         self.assertEquals([Point(2, 1), Point(2, 2)], board.find_ghosts())
 

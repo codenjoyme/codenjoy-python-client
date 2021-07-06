@@ -11,5 +11,5 @@ class TestSolver(TestCase):
                   "☼   ☼" \
                   "☼ ☺ ☼" \
                   "☼   ☼" \
-                  "☼☼☼☼"
+                  "☼☼☼☼☼"
         self.assertEqual("ACT", Solver().answer(message))
