@@ -55,6 +55,11 @@ class Board:
                                 elements.get('OTHER_POTION_HERO'),
                                 elements.get('OTHER_DEAD_HERO'))
 
+    def find_enemy_heroes(self):
+        return self._board.find(elements.get('ENEMY_HERO'),
+                                elements.get('ENEMY_POTION_HERO'),
+                                elements.get('ENEMY_DEAD_HERO'))
+
     def get_ghosts(self):
         return self._board.find(elements.get('GHOST'))
 
@@ -65,6 +70,7 @@ class Board:
         points.update(self.find_treasure_boxes())
         points.update(self.find_potions())
         points.update(self.find_other_heroes())
+        points.update(self.find_enemy_heroes())
         return sorted(points)
 
     def find_walls(self):
@@ -83,7 +89,8 @@ class Board:
                                 elements.get('POTION_TIMER_4'),
                                 elements.get('POTION_TIMER_5'),
                                 elements.get('POTION_HERO'),
-                                elements.get('OTHER_POTION_HERO'))
+                                elements.get('OTHER_POTION_HERO'),
+                                elements.get('ENEMY_POTION_HERO'))
 
     def find_blasts(self):
         return self._board.find(elements.get('BOOM'))
@@ -102,6 +109,7 @@ class Board:
         return self._board.__str__() + \
                "\nHero at: " + repr(self.find_hero()) + \
                "\nOther heroes at: " + repr(self.find_other_heroes()) + \
+               "\nEnemy heroes at: " + repr(self.find_enemy_heroes()) + \
                "\nGhosts at: " + repr(self.find_ghosts()) + \
                "\nPotions at: " + repr(self.find_potions()) + \
                "\nBlasts at: " + repr(self.find_blasts()) + \

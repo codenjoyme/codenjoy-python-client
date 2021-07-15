@@ -38,6 +38,10 @@ class TestBoard(TestCase):
         board = Board("#♥#" + "#♠#" + "#♣#")
         self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_other_heroes())
 
+    def test_find_enemy_heroes(self):
+        board = Board("#♡#" + "#♤#" + "#♧#")
+        self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_enemy_heroes())
+
     def test_find_barriers(self):
         board = Board("☼&#" + "123" + "♥♠♣")
         self.assertEquals(
@@ -81,7 +85,7 @@ class TestBoard(TestCase):
                       "☼#2  &  ☼" +
                       "☼# 3 ♣ ♠☼" +
                       "☼☺  4   ☼" +
-                      "☼   ♥ H☻☼" +
+                      "☼   ♡ H☻☼" +
                       "☼x H ҉҉҉☼" +
                       "☼& &    ☼" +
                       "☼☼☼☼☼☼☼☼☼")
@@ -90,13 +94,14 @@ class TestBoard(TestCase):
                           "☼#2  &  ☼\n" +
                           "☼# 3 ♣ ♠☼\n" +
                           "☼☺  4   ☼\n" +
-                          "☼   ♥ H☻☼\n" +
+                          "☼   ♡ H☻☼\n" +
                           "☼x H ҉҉҉☼\n" +
                           "☼& &    ☼\n" +
                           "☼☼☼☼☼☼☼☼☼\n" +
                           "\n" +
                           "Hero at: [1,4]\n" +
-                          "Other heroes at: [[3,7], [4,3], [5,5], [7,5], [7,7]]\n" +
+                          "Other heroes at: [[3,7], [5,5], [7,5], [7,7]]\n" +
+                          "Enemy heroes at: [[4,3]]\n" +
                           "Ghosts at: [[1,1], [3,1], [5,6]]\n" +
                           "Potions at: [[1,7], [2,6], [3,5], [4,4], [7,3], [7,5], [7,7]]\n" +
                           "Blasts at: [[5,2], [6,2], [7,2]]\n" +
