@@ -106,10 +106,13 @@ class Board:
         return list(blasts)
 
     def predict_blasts_for_one_side(self, pt, next_step):
+        _barriers = self.find_barriers()
         _points = []
         for i in range(1, self.BLAST_RANGE + 1):
             pt = next_step(pt)
-            if not pt.is_valid(self._board.get_size()) or pt in self.find_barriers():
+            if not pt.is_valid(self._board.get_size()):
+                break
+            if pt in _barriers:
                 break
             _points.append(pt)
         return _points
