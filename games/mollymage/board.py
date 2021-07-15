@@ -23,6 +23,7 @@
 ###
 
 from engine.game_board import GameBoard
+from engine.point import step_left, step_right, step_up, step_down
 from games.mollymage.element import elements
 
 
@@ -96,8 +97,22 @@ class Board:
         return self._board.find(elements.get('BOOM'))
 
     def predict_future_blasts(self):
-        # TODO: implement
-        return []
+        blasts = set()
+        for potion in self._board.find(elements.get('POTION_TIMER_1')):
+            blasts.update(self.predict_blasts_for_one_side(potion, step_left))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_right))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_up))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_down))
+        return list(blasts)
+
+    def predict_blasts_for_one_side(self, pt, next_step):
+        _points = []
+        for i in range(1, self.BLAST_RANGE + 1):
+            pt = next_step(pt)
+            if not pt.is_valid(self._board.get_size()) or pt in self.find_barriers():
+                break
+            _points.append(pt)
+        return _points
 
     def find_perks(self):
         return self._board.find(elements.get('POTION_COUNT_INCREASE'),

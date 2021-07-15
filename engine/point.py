@@ -59,5 +59,21 @@ class Point:
         return "[{},{}]".format(self._x, self._y)
 
 
+def step_right(pt):
+    return Point(pt.x() + 1, pt.y())
+
+
+def step_left(pt):
+    return Point(pt.x() - 1, pt.y())
+
+
+def step_up(pt):
+    return Point(pt.x(), pt.y() + 1)
+
+
+def step_down(pt):
+    return Point(pt.x(), pt.y() - 1)
+
+
 if __name__ == '__main__':
     raise RuntimeError("This module is not expected to be ran from CLI")
