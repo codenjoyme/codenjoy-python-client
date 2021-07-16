@@ -23,6 +23,7 @@
 ###
 
 from engine.game_board import GameBoard
+from engine.point import step_left, step_right, step_up, step_down
 from games.mollymage.element import elements
 
 
@@ -55,6 +56,11 @@ class Board:
                                 elements.get('OTHER_POTION_HERO'),
                                 elements.get('OTHER_DEAD_HERO'))
 
+    def find_enemy_heroes(self):
+        return self._board.find(elements.get('ENEMY_HERO'),
+                                elements.get('ENEMY_POTION_HERO'),
+                                elements.get('ENEMY_DEAD_HERO'))
+
     def get_ghosts(self):
         return self._board.find(elements.get('GHOST'))
 
@@ -65,6 +71,7 @@ class Board:
         points.update(self.find_treasure_boxes())
         points.update(self.find_potions())
         points.update(self.find_other_heroes())
+        points.update(self.find_enemy_heroes())
         return sorted(points)
 
     def find_walls(self):
@@ -83,14 +90,32 @@ class Board:
                                 elements.get('POTION_TIMER_4'),
                                 elements.get('POTION_TIMER_5'),
                                 elements.get('POTION_HERO'),
-                                elements.get('OTHER_POTION_HERO'))
+                                elements.get('OTHER_POTION_HERO'),
+                                elements.get('ENEMY_POTION_HERO'))
 
     def find_blasts(self):
         return self._board.find(elements.get('BOOM'))
 
     def predict_future_blasts(self):
-        # TODO: implement
-        return []
+        blasts = set()
+        for potion in self._board.find(elements.get('POTION_TIMER_1')):
+            blasts.update(self.predict_blasts_for_one_side(potion, step_left))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_right))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_up))
+            blasts.update(self.predict_blasts_for_one_side(potion, step_down))
+        return list(blasts)
+
+    def predict_blasts_for_one_side(self, pt, next_step):
+        _barriers = self.find_barriers()
+        _points = []
+        for i in range(1, self.BLAST_RANGE + 1):
+            pt = next_step(pt)
+            if not pt.is_valid(self._board.get_size()):
+                break
+            if pt in _barriers:
+                break
+            _points.append(pt)
+        return _points
 
     def find_perks(self):
         return self._board.find(elements.get('POTION_COUNT_INCREASE'),
@@ -102,6 +127,7 @@ class Board:
         return self._board.__str__() + \
                "\nHero at: " + repr(self.find_hero()) + \
                "\nOther heroes at: " + repr(self.find_other_heroes()) + \
+               "\nEnemy heroes at: " + repr(self.find_enemy_heroes()) + \
                "\nGhosts at: " + repr(self.find_ghosts()) + \
                "\nPotions at: " + repr(self.find_potions()) + \
                "\nBlasts at: " + repr(self.find_blasts()) + \

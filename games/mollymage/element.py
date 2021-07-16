@@ -29,11 +29,23 @@ elements = dict(
     POTION_HERO = b'\xe2\x98\xbb'.decode(),             # '☻' - This is if she is sitting on own potion
     DEAD_HERO = b'\xd1\xa0'.decode(),                   # 'Ѡ' - Oops, your Molly is dead (don't worry, she will appear somewhere in next move).
                                                         #       You're getting penalty points for each death.
+
     # other players heroes
+
     OTHER_HERO = b'\xe2\x99\xa5'.decode(),              # '♥' - This is what other heroes looks like.
-    OTHER_POTION_HERO = b'\xe2\x99\xa0'.decode(),       # '♠' - This is if player is sitting on own potion.
-    OTHER_DEAD_HERO = b'\xe2\x99\xa3'.decode(),         # '♣' - Enemy corpse (it will disappear shortly, right on the next move).
+    OTHER_POTION_HERO = b'\xe2\x99\xa0'.decode(),       # '♠' - This is if other hero is sitting on own potion.
+    OTHER_DEAD_HERO = b'\xe2\x99\xa3'.decode(),         # '♣' - Other hero corpse (it will disappear shortly,
+                                                        #       right on the next move).
                                                         #       If you've done it you'll get score points.
+
+
+    # enemy players heroes
+    ENEMY_HERO = b'\xe2\x99\xa1'.decode(),              # '♡' - This is what enemy heroes looks like.
+    ENEMY_POTION_HERO = b'\xe2\x99\xa4'.decode(),       # '♤' - This is if enemy hero is sitting on own potion.
+    ENEMY_DEAD_HERO = b'\xe2\x99\xa7'.decode(),         # '♧' - Enemy hero corpse (it will disappear shortly,
+                                                        #       right on the next move).
+                                                        #       If you've done it you'll get score points.
+
     # the potions
     POTION_TIMER_5 = '5',                               # '5' - After Molly set the potion, the timer starts (5 ticks).
     POTION_TIMER_4 = '4',                               # '4' - This will blow up after 4 ticks.
