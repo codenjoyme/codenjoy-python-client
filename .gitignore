@@ -2,4 +2,5 @@
 **/__pycache__/
 *.iml
 
-.DS_Store
+.DS_Stor
+.python/
