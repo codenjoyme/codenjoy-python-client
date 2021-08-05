@@ -121,7 +121,8 @@ class Board:
         return self._board.find(elements.get('POTION_COUNT_INCREASE'),
                                 elements.get('POTION_REMOTE_CONTROL'),
                                 elements.get('POTION_IMMUNE'),
-                                elements.get('POTION_BLAST_RADIUS_INCREASE'))
+                                elements.get('POTION_BLAST_RADIUS_INCREASE'),
+                                elements.get('POISON_THROWER'))
 
     def __str__(self):
         return self._board.__str__() + \

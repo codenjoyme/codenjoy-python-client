@@ -72,6 +72,7 @@ elements = dict(
     POTION_IMMUNE = 'i',                                # 'i' - Do not die after potion blast (own potion and others as well). Temporary.
     POTION_REMOTE_CONTROL = 'r',                        # 'r' - Potion blast not by timer but by second act.
                                                         #       Number of RC triggers is limited and can be set in settings.
+    POISON_THROWER = 'T',                               # 'T' - Hero can shoot by poison cloud                         
 
     # Space
     NONE = ' '                                          # ' ' - This is the only place where you can move your Molly.
