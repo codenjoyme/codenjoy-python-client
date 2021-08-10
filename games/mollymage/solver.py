@@ -21,9 +21,8 @@
 # <http://www.gnu.org/licenses/gpl-3.0.html>.
 # #L%
 ###
-
+from engine import direction
 from engine.game_solver import GameSolver
-from games.mollymage.action import Action
 from games.mollymage.board import Board
 
 
@@ -39,7 +38,7 @@ class Solver(GameSolver):
 
     def __next_action(self):
         # TODO: write your code here
-        return Action.ACT
+        return direction.ACT
 
 
 if __name__ == '__main__':
