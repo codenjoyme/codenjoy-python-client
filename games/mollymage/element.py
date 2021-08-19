@@ -73,6 +73,7 @@ elements = dict(
     POTION_REMOTE_CONTROL = 'r',                        # 'r' - Potion blast not by timer but by second act.
                                                         #       Number of RC triggers is limited and can be set in settings.
     POISON_THROWER = 'T',                               # 'T' - Hero can shoot by poison cloud                         
+    POTION_EXPLODER = 'A',                              # 'A' - Hero can explode all potions on the field
 
     # Space
     NONE = ' '                                          # ' ' - This is the only place where you can move your Molly.
