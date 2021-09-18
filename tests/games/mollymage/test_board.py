@@ -78,9 +78,9 @@ class TestBoard(TestCase):
         self.assertEquals([Point(2, 0)], board.find_blasts())
 
     def test_find_perks(self):
-        board = Board("#cr" + "#i+" + "#T#")
+        board = Board("#cr" + "#i+" + "#TA")
         self.assertEquals(
-            [Point(1, 0), Point(1, 1), Point(1, 2), Point(2, 1), Point(2, 2)],
+            [Point(1, 0), Point(1, 1), Point(1, 2), Point(2, 0), Point(2, 1), Point(2, 2)],
             board.find_perks())
 
     def test_report(self):
