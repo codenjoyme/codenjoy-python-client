@@ -42,8 +42,12 @@ class TestBoard(TestCase):
         self.assertEqual(Point(2, 0), board.find_hero())
         board = Board("###" + "###" + "##}")
         self.assertEqual(Point(2, 0), board.find_hero())
+        board = Board("###" + "###" + "##⍃")
+        self.assertEqual(Point(2, 0), board.find_hero())
+        board = Board("###" + "###" + "##⍄")
+        self.assertEqual(Point(2, 0), board.find_hero())
 
-        board = Board("##ѠЯ" + "RY◄►" + "][{}" + "####")
+        board = Board("⍃⍄ѠЯ" + "RY◄►" + "][{}" + "####")
         self.assertEqual(Point(0, 1), board.find_hero())
 
     def test_find_hero_mask(self):
@@ -67,8 +71,12 @@ class TestBoard(TestCase):
         self.assertEqual(Point(2, 0), board.find_hero())
         board = Board("###" + "###" + "##⋝")
         self.assertEqual(Point(2, 0), board.find_hero())
+        board = Board("###" + "###" + "##ᐊ")
+        self.assertEqual(Point(2, 0), board.find_hero())
+        board = Board("###" + "###" + "##ᐅ")
+        self.assertEqual(Point(2, 0), board.find_hero())
 
-        board = Board("##x⊰" + "⊱⍬⊲⊳" + "⊅⊄⋜⋝" + "####")
+        board = Board("ᐊᐅx⊰" + "⊱⍬⊲⊳" + "⊅⊄⋜⋝" + "####")
         self.assertEqual(Point(0, 1), board.find_hero())
 
     def test_find_hero_no_result(self):
@@ -76,32 +84,32 @@ class TestBoard(TestCase):
         self.assertRaises(ValueError, lambda: board.find_hero())
 
     def test_find_other_heroes(self):
-        board = Board("##Z⌋" + "⌊U)(" + "⊐⊏ЭЄ" + "####")
+        board = Board("##Z⌋" + "⌊U)(" + "⊐⊏ЭЄ" + "ᗉᗆ##")
         self.assertEqual(
-            [Point(0, 1), Point(0, 2), Point(1, 1), Point(1, 2), Point(2, 1),
-             Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_other_heroes())
+            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1), Point(1, 2),
+             Point(2, 1), Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_other_heroes())
 
-        board = Board("##⋈⋰" + "⋱⋕⋊⋉" + "⋣⋢⊣⊢" + "####")
+        board = Board("##⋈⋰" + "⋱⋕⋊⋉" + "⋣⋢⊣⊢" + "ᗏᗌ##")
         self.assertEqual(
-            [Point(0, 1), Point(0, 2), Point(1, 1), Point(1, 2), Point(2, 1),
-             Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_other_heroes())
+            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1), Point(1, 2),
+             Point(2, 1), Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_other_heroes())
 
     def test_find_enemy_heroes(self):
-        board = Board("##Ž⟧" + "⟦Ǔ❫❪" + "⋥⋤ǮĚ" + "####")
+        board = Board("##Ž⟧" + "⟦Ǔ❫❪" + "⋥⋤ǮĚ" + "⇇⇉##")
         self.assertEqual(
-            [Point(0, 1), Point(0, 2), Point(1, 1), Point(1, 2), Point(2, 1),
-             Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_enemy_heroes())
+            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1), Point(1, 2),
+             Point(2, 1), Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_enemy_heroes())
 
-        board = Board("##⧓⇢" + "⇠≠⧒⧑" + "⌫⌦❵❴" + "####")
+        board = Board("##⧓⇢" + "⇠≠⧒⧑" + "⌫⌦❵❴" + "⬱⇶##")
         self.assertEqual(
-            [Point(0, 1), Point(0, 2), Point(1, 1), Point(1, 2), Point(2, 1),
-             Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_enemy_heroes())
+            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1), Point(1, 2),
+             Point(2, 1), Point(2, 2), Point(2, 3), Point(3, 1), Point(3, 2), Point(3, 3)], board.find_enemy_heroes())
 
     def test_find_robbers(self):
-        board = Board("Q«»" + "<>#" + "⍇⍈#")
+        board = Board("Q«»" + "‹›<" + ">⍇⍈")
         self.assertEqual(
-            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0),
-             Point(1, 1), Point(1, 2), Point(2, 2)], board.find_robbers())
+            [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1),
+             Point(1, 2), Point(2, 0), Point(2, 1), Point(2, 2)], board.find_robbers())
 
     def test_find_barriers(self):
         board = Board("  #" + "  ☼" + "   ")
