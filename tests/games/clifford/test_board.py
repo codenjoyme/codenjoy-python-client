@@ -132,24 +132,33 @@ class TestBoard(TestCase):
         board = Board("##S" + "###" + "###")
         self.assertEqual([Point(2, 2)], board.find_potions())
 
+    def test_find_doors(self):
+        board = Board("⍙⍚⍜" + "⍍⌺⌼" + "###")
+        self.assertEqual([Point(0, 1), Point(0, 2), Point(1, 1),
+                          Point(1, 2), Point(2, 1), Point(2, 2)], board.find_doors())
+
+    def test_find_keys(self):
+        board = Board("✦✼⍟" + "###" + "###")
+        self.assertEqual([Point(0, 2), Point(1, 2), Point(2, 2)], board.find_keys())
+
     def test_report(self):
         board = Board("board=" +
                       "☼☼☼☼☼☼☼☼☼" +
                       "☼ ►*## $☼" +
-                      "☼ H ⧒⧒  ☼" +
-                      "☼ H  1  ☼" +
+                      "☼ H ⧒⧒ ✼☼" +
+                      "☼ H  1 ⍍☼" +
                       "☼S ⊐ &  ☼" +
-                      "☼   ~~~ ☼" +
-                      "☼Z3   ⊏ ☼" +
+                      "☼ ✦ ~~~ ☼" +
+                      "☼Z3 ⌺ ⊏ ☼" +
                       "☼ @@ ⍈Q ☼" +
                       "☼☼☼☼☼☼☼☼☼")
         self.assertEqual("☼☼☼☼☼☼☼☼☼\n" +
                          "☼ ►*## $☼\n" +
-                         "☼ H ⧒⧒  ☼\n" +
-                         "☼ H  1  ☼\n" +
+                         "☼ H ⧒⧒ ✼☼\n" +
+                         "☼ H  1 ⍍☼\n" +
                          "☼S ⊐ &  ☼\n" +
-                         "☼   ~~~ ☼\n" +
-                         "☼Z3   ⊏ ☼\n" +
+                         "☼ ✦ ~~~ ☼\n" +
+                         "☼Z3 ⌺ ⊏ ☼\n" +
                          "☼ @@ ⍈Q ☼\n" +
                          "☼☼☼☼☼☼☼☼☼\n" +
                          "\n" +
@@ -157,4 +166,5 @@ class TestBoard(TestCase):
                          "Other heroes at: [[1,2], [3,4], [6,2]]\n"
                          "Enemy heroes at: [[4,6], [5,6]]\n"
                          "Robbers at: [[5,1], [6,1]]\n"
-                         "Mask potions at [[1,4]]", board.__str__())
+                         "Mask potions at: [[1,4]]\n"
+                         "Keys at: [[2,3], [7,6]]", board.__str__())

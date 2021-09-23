@@ -158,13 +158,29 @@ class Board:
     def find_potions(self):
         return self._board.find(elements.get('MASK_POTION'))
 
+    def find_doors(self):
+        return self._board.find(
+            elements.get('OPENED_DOOR_GOLD'),
+            elements.get('OPENED_DOOR_SILVER'),
+            elements.get('OPENED_DOOR_BRONZE'),
+            elements.get('CLOSED_DOOR_GOLD'),
+            elements.get('CLOSED_DOOR_SILVER'),
+            elements.get('CLOSED_DOOR_BRONZE'))
+
+    def find_keys(self):
+        return self._board.find(
+            elements.get('KEY_GOLD'),
+            elements.get('KEY_SILVER'),
+            elements.get('KEY_BRONZE'))
+
     def __str__(self):
         return self._board.__str__() + \
                "\nHero at: " + repr(self.find_hero()) + \
                "\nOther heroes at: " + repr(self.find_other_heroes()) + \
                "\nEnemy heroes at: " + repr(self.find_enemy_heroes()) + \
                "\nRobbers at: " + repr(self.find_robbers()) + \
-               "\nMask potions at " + repr(self.find_potions())
+               "\nMask potions at: " + repr(self.find_potions()) + \
+               "\nKeys at: " + repr(self.find_keys())
 
 
 if __name__ == '__main__':
