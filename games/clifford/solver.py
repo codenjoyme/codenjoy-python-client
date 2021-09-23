@@ -10,47 +10,36 @@
 # it under the terms of the GNU General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/gpl-3.0.html>.
 # #L%
 ###
-
-import os
-import sys
-file_dir = os.path.dirname(__file__)
-sys.path.append(file_dir)
-
-from sys import argv
-
-import games.mollymage.solver
-import games.clifford.solver
-from engine.web_socket_runner import WebSocketRunner
+from engine import direction
+from engine.game_solver import GameSolver
+from games.clifford.board import Board
 
 
-def main():
-    game = "clifford"
-    url = "http://localhost:8080/codenjoy-contest/board/player/0?code=000000000000"
-    if len(argv) == 3:
-        game = argv[1]
-        url = argv[2]
+class Solver(GameSolver):
 
-    solver = determine_game_solver(game)
-    WebSocketRunner(url, solver).run()
+    def answer(self, message):
+        board = Board(message)
+        print("Board \n" + board.__str__())
+        action = self.__next_action()
+        print("\nAnswer: " + action.__str__())
+        print("-------------------------------------------------------------")
+        return action.__str__()
 
-
-def determine_game_solver(game):
-    return {
-        "mollymage": games.mollymage.solver.Solver(),
-        "clifford": games.clifford.solver.Solver()
-    }[game]
+    def __next_action(self):
+        # TODO: write your code here
+        return direction.ACT
 
 
 if __name__ == '__main__':
-    main()
+    raise RuntimeError("This module is not intended to be ran from CLI")
