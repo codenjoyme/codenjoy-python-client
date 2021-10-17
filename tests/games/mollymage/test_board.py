@@ -44,7 +44,7 @@ class TestBoard(TestCase):
         self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_other_heroes())
 
     def test_find_enemy_heroes(self):
-        board = Board("#♡#" + "#♤#" + "#♧#")
+        board = Board("#ö#" + "#Ö#" + "#ø#")
         self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_enemy_heroes())
 
     def test_find_barriers(self):
@@ -90,7 +90,7 @@ class TestBoard(TestCase):
                       "☼#2  &  ☼" +
                       "☼# 3 ♣ ♠☼" +
                       "☼☺  4   ☼" +
-                      "☼   ♡ H☻☼" +
+                      "☼   ö H☻☼" +
                       "☼x H ҉҉҉☼" +
                       "☼& &    ☼" +
                       "☼☼☼☼☼☼☼☼☼")
@@ -99,7 +99,7 @@ class TestBoard(TestCase):
                           "☼#2  &  ☼\n" +
                           "☼# 3 ♣ ♠☼\n" +
                           "☼☺  4   ☼\n" +
-                          "☼   ♡ H☻☼\n" +
+                          "☼   ö H☻☼\n" +
                           "☼x H ҉҉҉☼\n" +
                           "☼& &    ☼\n" +
                           "☼☼☼☼☼☼☼☼☼\n" +
