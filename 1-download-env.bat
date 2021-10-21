@@ -12,7 +12,7 @@ if "%INSTALL_LOCALLY%"=="" ( goto :skip )
 
 cd %ROOT%
 IF EXIST %TOOLS%\python.zip (
-    del %TOOLS%\python.zip
+    del /Q %TOOLS%\python.zip
 )
 powershell -command "& { set-executionpolicy remotesigned -s currentuser; [System.Net.ServicePointManager]::SecurityProtocol = 3072 -bor 768 -bor 192 -bor 48; $client=New-Object System.Net.WebClient; $client.Headers['User-Agent']='PoweShell script';  $client.DownloadFile('%ARCH_PYTHON%','%TOOLS%\python.zip') }"
 rd /S /Q %TOOLS%\..\.python
