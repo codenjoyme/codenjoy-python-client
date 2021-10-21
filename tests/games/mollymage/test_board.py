@@ -13,20 +13,20 @@ from games.mollymage.element import elements
 class TestBoard(TestCase):
     def test_get_at_invalid_point(self):
         board = Board("###" + "###" + "###")
-        self.assertEquals(elements.get('WALL'), board.get_at(Point(-1, -1)))
+        self.assertEqual(elements.get('WALL'), board.get_at(Point(-1, -1)))
 
     def test_find_hero(self):
         board = Board("#☺#" + "###" + "###")
-        self.assertEquals(Point(1, 2), board.find_hero())
+        self.assertEqual(Point(1, 2), board.find_hero())
 
         board = Board("###" + "#☻#" + "###")
-        self.assertEquals(Point(1, 1), board.find_hero())
+        self.assertEqual(Point(1, 1), board.find_hero())
 
         board = Board("###" + "###" + "#Ѡ#")
-        self.assertEquals(Point(1, 0), board.find_hero())
+        self.assertEqual(Point(1, 0), board.find_hero())
 
         board = Board("Ѡ☺☻" + "###" + "###")
-        self.assertEquals(Point(0, 2), board.find_hero())
+        self.assertEqual(Point(0, 2), board.find_hero())
 
     def test_find_hero_no_result(self):
         board = Board("###" + "###" + "###")
@@ -34,22 +34,22 @@ class TestBoard(TestCase):
 
     def test_is_game_over(self):
         board = Board("###" + "##☺" + "###")
-        self.assertEquals(False, board.is_game_over())
+        self.assertEqual(False, board.is_game_over())
 
         board = Board("###" + "Ѡ##" + "###")
-        self.assertEquals(True, board.is_game_over())
+        self.assertEqual(True, board.is_game_over())
 
     def test_find_other_heroes(self):
         board = Board("#♥#" + "#♠#" + "#♣#")
-        self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_other_heroes())
+        self.assertEqual([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_other_heroes())
 
     def test_find_enemy_heroes(self):
         board = Board("#ö#" + "#Ö#" + "#ø#")
-        self.assertEquals([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_enemy_heroes())
+        self.assertEqual([Point(1, 0), Point(1, 1), Point(1, 2)], board.find_enemy_heroes())
 
     def test_find_barriers(self):
         board = Board("☼&#" + "123" + "♥♠♣")
-        self.assertEquals(
+        self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2),
              Point(2, 0), Point(2, 1), Point(2, 2)],
@@ -57,29 +57,29 @@ class TestBoard(TestCase):
 
     def test_find_walls(self):
         board = Board("###" + "☼##" + "☼##")
-        self.assertEquals([Point(0, 0), Point(0, 1)], board.find_walls())
+        self.assertEqual([Point(0, 0), Point(0, 1)], board.find_walls())
 
     def test_find_ghosts(self):
         board = Board("##&" + "##&" + "###")
-        self.assertEquals([Point(2, 1), Point(2, 2)], board.find_ghosts())
+        self.assertEqual([Point(2, 1), Point(2, 2)], board.find_ghosts())
 
     def test_find_treasure_boxes(self):
         board = Board("҉#҉" + "҉҉҉" + "҉#҉")
-        self.assertEquals([Point(1, 0), Point(1, 2)], board.find_treasure_boxes())
+        self.assertEqual([Point(1, 0), Point(1, 2)], board.find_treasure_boxes())
 
     def test_find_potions(self):
         board = Board("123" + "45#" + "☻♠#")
-        self.assertEquals(
+        self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1), Point(1, 2), Point(2, 2)],
             board.find_potions())
 
     def test_find_blasts(self):
         board = Board("###" + "###" + "##҉")
-        self.assertEquals([Point(2, 0)], board.find_blasts())
+        self.assertEqual([Point(2, 0)], board.find_blasts())
 
     def test_find_perks(self):
         board = Board("#cr" + "#i+" + "#TA")
-        self.assertEquals(
+        self.assertEqual(
             [Point(1, 0), Point(1, 1), Point(1, 2), Point(2, 0), Point(2, 1), Point(2, 2)],
             board.find_perks())
 
@@ -94,7 +94,7 @@ class TestBoard(TestCase):
                       "☼x H ҉҉҉☼" +
                       "☼& &    ☼" +
                       "☼☼☼☼☼☼☼☼☼")
-        self.assertEquals("☼☼☼☼☼☼☼☼☼\n" +
+        self.assertEqual("☼☼☼☼☼☼☼☼☼\n" +
                           "☼1 ♣   ♠☼\n" +
                           "☼#2  &  ☼\n" +
                           "☼# 3 ♣ ♠☼\n" +

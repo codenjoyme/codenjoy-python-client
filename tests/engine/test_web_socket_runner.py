@@ -11,13 +11,13 @@ from engine.web_socket_runner import url_to_wstoken
 class TestWebSocketRunner(TestCase):
 
     def test_url_to_wstoken_valid_http_url(self):
-        self.assertEquals(
+        self.assertEqual(
             "ws://127.0.0.1:8080/codenjoy-contest/ws?user=793wdxskw521spo4mn1y&code=531459153668826800",
             url_to_wstoken(
                 "http://127.0.0.1:8080/codenjoy-contest/board/player/793wdxskw521spo4mn1y?code=531459153668826800"))
 
     def test_url_to_wstoken_valid_https_url(self):
-        self.assertEquals(
+        self.assertEqual(
             "wss://dojorena.io/codenjoy-contest/ws?user=793wdxskw521spo4mn1y&code=531459153668826800",
             url_to_wstoken(
                 "https://dojorena.io/codenjoy-contest/board/player/793wdxskw521spo4mn1y?code=531459153668826800"))

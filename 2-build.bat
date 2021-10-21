@@ -1,24 +1,22 @@
-if "%PYTHON_CLIENT_HOME%"=="" (
-    call 0-settings.bat
-)
+call 0-settings.bat
 
 echo off
-echo [44;93m
-echo        +-------------------------------------------------------------------------+
-echo        !                   Now we are building php client...                     !
-echo        +-------------------------------------------------------------------------+
-echo [0m
+echo        [44;93m+----------------------------------------------+[0m
+echo        [44;93m!       Now we are building php client...      ![0m
+echo        [44;93m+----------------------------------------------+[0m
+echo on
 
-SET PATH=%PYTHON_HOME%;%PATH%
-call python --version
+call %PYTHON% --version
 
-
-@call :ask
+call :ask
 
 goto :eof
 
 :ask
-    @echo off
-    echo Press any key to continue
+    echo off
+    echo        [44;93m+---------------------------------+[0m
+    echo        [44;93m!    Press any key to continue    ![0m
+    echo        [44;93m+---------------------------------+[0m
+    echo on
     pause >nul
 goto :eof

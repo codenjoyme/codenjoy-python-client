@@ -1,38 +1,46 @@
-@echo off
-if "%GAME_TO_RUN%"=="" (
-    call 0-settings.bat
-)
+call 0-settings.bat
 
-SET PATH=%PYTHON_HOME%;%PATH%
+echo off
+echo        [44;93m+---------------------------------------+[0m
+echo        [44;93m!      Now we are starting TESTS...     ![0m
+echo        [44;93m+---------------------------------------+[0m
+echo on
 
-@echo        +-------------------------------------------------------------------------+
-@echo        !                       Now we are starting TESTS...                      !
-@echo        +-------------------------------------------------------------------------+
+xcopy /S/I/y test\* temp\
+xcopy /S/I/y engine\* temp\engine\
+xcopy /S/I/y lib\* temp\lib\
+xcopy /S/I/y games\* temp\games\
 
-set ROOT=%CD%
 
-xcopy /y engine\*.py tests\engine\engine\
-xcopy /y lib\*.py tests\engine\lib\
-xcopy /y engine\*.py tests\games\%GAME_TO_RUN%\engine\
-xcopy /y games\%GAME_TO_RUN%\*.py tests\games\%GAME_TO_RUN%\games\%GAME_TO_RUN%\
-cd tests\engine
-call python -m unittest discover
+xcopy /S/I/y tests\engine\* temp\
+cd temp\
+call %PYTHON% -m unittest discover
 cd %ROOT%
+rd /S /Q temp/test_*.py
 
-cd tests\games\%GAME_TO_RUN%
-call python -m unittest discover
+xcopy /S/I/y tests\games\clifford\* temp\
+cd temp\
+call %PYTHON% -m unittest discover
 cd %ROOT%
+rd /S /Q temp/test_*.py
 
-rd /S /Q tests\engine\engine
-rd /S /Q tests\engine\lib
-rd /S /Q tests\games\%GAME_TO_RUN%\engine
-rd /S /Q tests\games\%GAME_TO_RUN%\games
+xcopy /S/I/y tests\games\mollymage\* temp\
+cd temp\
+call %PYTHON% -m unittest discover
+cd %ROOT%
+rd /S /Q temp/test_*.py
+
+rd /S /Q temp
 
 call :ask
 
 goto :eof
 
 :ask
-    echo Press any key to continue
+    echo off
+    echo        [44;93m+---------------------------------+[0m
+    echo        [44;93m!    Press any key to continue    ![0m
+    echo        [44;93m+---------------------------------+[0m
+    echo on
     pause >nul
 goto :eof
