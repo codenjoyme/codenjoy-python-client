@@ -11,6 +11,7 @@ xcopy /S/I/y engine\* temp\engine\
 xcopy /S/I/y lib\* temp\lib\
 xcopy /S/I/y games\* temp\games\
 
+call :sep
 
 xcopy /S/I/y tests\engine\* temp\
 cd temp\
@@ -18,11 +19,15 @@ call %PYTHON% -m unittest discover
 cd %ROOT%
 rd /S /Q temp/test_*.py
 
+call :sep
+
 xcopy /S/I/y tests\games\clifford\* temp\
 cd temp\
 call %PYTHON% -m unittest discover
 cd %ROOT%
 rd /S /Q temp/test_*.py
+
+call :sep
 
 xcopy /S/I/y tests\games\mollymage\* temp\
 cd temp\
@@ -31,6 +36,8 @@ cd %ROOT%
 rd /S /Q temp/test_*.py
 
 rd /S /Q temp
+
+call :sep
 
 call :ask
 
@@ -43,4 +50,10 @@ goto :eof
     echo        [44;93m+---------------------------------+[0m
     echo on
     pause >nul
+goto :eof
+
+:sep
+    echo off
+    echo [44;93m---------------------------------------------------------------------------------------[0m
+    echo on
 goto :eof
