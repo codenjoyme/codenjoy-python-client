@@ -1,3 +1,7 @@
+echo off
+call lib.bat :color Setup variables...
+echo on
+
 if "%GAME_TO_RUN%"=="" ( set GAME_TO_RUN=mollymage)
 if "%BOARD_URL%"==""   ( set BOARD_URL=http://127.0.0.1:8080/codenjoy-contest/board/player/0?code=000000000000)
 
@@ -21,10 +25,10 @@ if "%NO_PYTHON%"=="true" ( set PATH=%PYTHON_HOME%;%PATH%)
 set PYTHON=%PYTHON_HOME%\python
 
 echo off
-echo        [44;93mPYTHON_HOME=%PYTHON_HOME%[0m
+call lib.bat :color PYTHON_HOME=%PYTHON_HOME%
 echo on
 
-set ARCH_PYTHON=https://www.python.org/ftp/python/3.9.6/python-3.9.6-embed-amd64.zip
-set ARCH_PYTHON_FOLDER=
+set ARCH_URL=https://www.python.org/ftp/python/3.9.6/python-3.9.6-embed-amd64.zip
+set ARCH_FOLDER=
 
 set PYTHON_CLIENT_HOME=%ROOT%
