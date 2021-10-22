@@ -1,5 +1,5 @@
 echo off
-call lib.bat :color Setup variables...
+call lib :color Setup variables...
 echo on
 
 if "%GAME_TO_RUN%"=="" ( set GAME_TO_RUN=mollymage)
@@ -25,7 +25,7 @@ if "%NO_PYTHON%"=="true" ( set PATH=%PYTHON_HOME%;%PATH%)
 set PYTHON=%PYTHON_HOME%\python
 
 echo off
-call lib.bat :color PYTHON_HOME=%PYTHON_HOME%
+call lib :color PYTHON_HOME=%PYTHON_HOME%
 echo on
 
 set ARCH_URL=https://www.python.org/ftp/python/3.9.6/python-3.9.6-embed-amd64.zip
