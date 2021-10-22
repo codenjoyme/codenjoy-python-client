@@ -8,7 +8,7 @@ if "%SKIP_PYTHON_INSTALL%"=="true" ( goto :skip )
 if "%INSTALL_LOCALLY%"=="false" ( goto :skip )
 if "%INSTALL_LOCALLY%"=="" ( goto :skip )
 
-call lib.bat :install python
+call lib.bat :install python %ARCH_URL% %ARCH_FOLDER%
 call lib.bat :print_color %PYTHON% --version
 
 call lib.bat :ask
