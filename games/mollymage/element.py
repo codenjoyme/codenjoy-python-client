@@ -24,59 +24,131 @@
 
 elements = dict(
 
-    # your Molly
-    HERO = '☺',                         # '☺' - This is what she usually looks like
-    POTION_HERO = '☻',                  # '☻' - This is if she is sitting on own potion
-    DEAD_HERO = 'Ѡ',                    # 'Ѡ' - Oops, your Molly is dead (don't worry, she will appear somewhere in next move).
-                                        #       You're getting penalty points for each death.
+        # After Molly set the potion, the timer starts (5 ticks).
 
-    # other players heroes
+    POTION_TIMER_5='5',
 
-    OTHER_HERO = '♥',                   # '♥' - This is what other heroes looks like.
-    OTHER_POTION_HERO = '♠',            # '♠' - This is if other hero is sitting on own potion.
-    OTHER_DEAD_HERO = '♣',              # '♣' - Other hero corpse (it will disappear shortly,
-                                        #       right on the next move).
-                                        #       If you've done it you'll get score points.
+        # This potion will blow up after 4 ticks.
 
+    POTION_TIMER_4='4',
 
-    # enemy players heroes
-    ENEMY_HERO = 'ö',                   # 'ö' - This is what enemy heroes looks like.
-    ENEMY_POTION_HERO = 'Ö',            # 'Ö' - This is if enemy hero is sitting on own potion.
-    ENEMY_DEAD_HERO = 'ø',              # 'ø' - Enemy hero corpse (it will disappear shortly,
-                                        #       right on the next move).
-                                        #       If you've done it you'll get score points.
+        # This after 3...
 
-    # the potions
-    POTION_TIMER_5 = '5',               # '5' - After Molly set the potion, the timer starts (5 ticks).
-    POTION_TIMER_4 = '4',               # '4' - This will blow up after 4 ticks.
-    POTION_TIMER_3 = '3',               # '3' - This after 3...
-    POTION_TIMER_2 = '2',               # '2' - Two..
-    POTION_TIMER_1 = '1',               # '1' - One.
-    BOOM = '҉',                         # '҉' - Boom! this is what is potion does everything that is destroyable got destroyed
+    POTION_TIMER_3='3',
 
-    # walls
-    WALL = '☼',                         # '☼' - Indestructible wall - it will not fall from potion.
-    TREASURE_BOX = '#',                 # '#' - This is a treasure box, it opens with an explosion.
-    OPENING_TREASURE_BOX = 'H',         # 'H' - this is like a treasure box opens looks like, it will disappear on next move.
-                                        #       if it's you did it - you'll get score points. Perhaps a prize will appear.
+        # Two..
 
-    # soulless creatures
-    GHOST = '&',                        # '&' - This guys runs over the board randomly and gets in the way all the time.
-                                        #       If it will touch Molly - she will die. You'd better kill this piece of ... soul,
-                                        #       you'll get score points for it.
-    DEAD_GHOST = 'x',                   # 'x' - this is chopper corpse
+    POTION_TIMER_2='2',
 
-    # Perks
-    POTION_BLAST_RADIUS_INCREASE = '+', # '+' - Potion blast radius increase. Applicable only to new potions. The perk is temporary.
-    POTION_COUNT_INCREASE = 'c',        # 'c' - Increase available potions count. Number of extra potions can be set in settings. Temporary.
-    POTION_IMMUNE = 'i',                # 'i' - Do not die after potion blast (own potion and others as well). Temporary.
-    POTION_REMOTE_CONTROL = 'r',        # 'r' - Potion blast not by timer but by second act.
-                                        #       Number of RC triggers is limited and can be set in settings.
-    POISON_THROWER = 'T',               # 'T' - Hero can shoot by poison cloud
-    POTION_EXPLODER = 'A',              # 'A' - Hero can explode all potions on the field
+        # One.
 
-    # Space
-    NONE = ' '                          # ' ' - This is the only place where you can move your Molly.
+    POTION_TIMER_1='1',
+
+        # Boom! this is what is potion does, everything that is
+        # destroyable got destroyed.
+
+    BOOM='҉',
+
+        # Indestructible wall - it will not fall from potion.
+
+    WALL='☼',
+
+        # This is a treasure box, it opens with an explosion.
+
+    TREASURE_BOX='#',
+
+        # This is like a treasure box opens looks like, it will
+        # disappear on next move. If it's you did it - you'll get
+        # score points. Perhaps a prize will appear.
+
+    OPENING_TREASURE_BOX='H',
+
+        # This guys runs over the board randomly and gets in the way
+        # all the time. If it will touch Molly - she will die. You'd
+        # better kill this piece of ... soul, you'll get score points
+        # for it.
+
+    GHOST='&',
+
+        # This is ghost corpse.
+
+    DEAD_GHOST='x',
+
+        # Temporarily increase potion radius blast. Applicable only to
+        # new potions.
+
+    POTION_BLAST_RADIUS_INCREASE='+',
+
+        # Temporarily increase available potions count. Number of
+        # extra potions can be set in settings*.
+
+    POTION_COUNT_INCREASE='c',
+
+        # Next several potions would be with remote control.
+        # Activating by command ACT. Number of RC triggers is limited
+        # and can be set in settings*.
+
+    POTION_REMOTE_CONTROL='r',
+
+        # Temporarily gives you immunity from potion blasts (own
+        # potion and others as well).
+
+    POTION_IMMUNE='i',
+
+        # Hero can shoot by poison cloud. Using: ACT(1)+Direction.
+        # Temporary.
+
+    POISON_THROWER='T',
+
+        # Hero can explode all potions on the field. Using: ACT(2).
+        # Temporary.
+
+    POTION_EXPLODER='A',
+
+        # A void. This is the only place where you can move your
+        # Molly.
+
+    NONE=' ',
+
+        # This is what your Molly usually looks like.
+
+    HERO='☺',
+
+        # This is if your Molly is sitting on own potion.
+
+    POTION_HERO='☻',
+
+        # Oops, your Molly is dead (don't worry, she will appear
+        # somewhere in next move). You're getting penalty points for
+        # each death.
+
+    DEAD_HERO='Ѡ',
+
+        # This is what other heroes looks like.
+
+    OTHER_HERO='♥',
+
+        # This is if other hero is sitting on own potion.
+
+    OTHER_POTION_HERO='♠',
+
+        # Other hero corpse (it will disappear shortly, right on the
+        # next move). If you've done it you'll get score points.
+
+    OTHER_DEAD_HERO='♣',
+
+        # This is what enemy heroes looks like.
+
+    ENEMY_HERO='ö',
+
+        # This is if enemy hero is sitting on own potion.
+
+    ENEMY_POTION_HERO='Ö',
+
+        # Enemy hero corpse (it will disappear shortly, right on the
+        # next move). If you've done it you'll get score points.
+
+    ENEMY_DEAD_HERO='ø'
 )
 
 if __name__ == '__main__':

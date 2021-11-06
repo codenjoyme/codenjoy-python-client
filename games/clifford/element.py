@@ -23,107 +23,322 @@
 ###
 
 elements = dict(
-    NONE=' ',  # Пустое место – по которому может двигаться детектив
 
-    BRICK='#',  # Cтена в которой можно прострелить дырочку слева или справа от детектива
-                # (в зависимости от того, куда он сейчас смотрит)
+        # Empty space - where the hero can move.
 
-    PIT_FILL_1='1',  # Стена со временем зарастает. Когда процес начинается - мы видим таймер
+    NONE=' ',
+
+        # A wall where you can shoot a hole.
+
+    BRICK='#',
+
+        # The wall is restored over time. When the process begins, we
+        # see a timer.
+
+    PIT_FILL_1='1',
+
+        # The wall is restored over time. When the process begins, we
+        # see a timer.
+
     PIT_FILL_2='2',
+
+        # The wall is restored over time. When the process begins, we
+        # see a timer.
+
     PIT_FILL_3='3',
+
+        # The wall is restored over time. When the process begins, we
+        # see a timer.
+
     PIT_FILL_4='4',
 
-    STONE='☼',  # Неразрушаемая стена - в ней ничего прострелить не получится
+        # Indestructible wall - It cannot be destroyed with a shot.
 
-    CRACK_PIT='*',  # В момент выстрела мы видим процесс так
+    STONE='☼',
 
-    CLUE_KNIFE='$',  # Улика нож
-    CLUE_GLOVE='&',  # Улика перчатка
-    CLUE_RING='@',  # Улика кольцо
+        # At the moment of the shot, we see the wall like this.
 
-    # Твой детектив в зависимости от того, чем он сейчас занят отображается следующими символами
-    HERO_DIE='Ѡ',  # Детектив переживает процесс умирания
-    HERO_LADDER='Y',  # Детектив находится на лестнице
-    HERO_LEFT='◄',  # Детектив бежит влево
-    HERO_RIGHT='►',  # Детектив бежит вправо
-    HERO_FALL=']',  # Детектив падает
-    HERO_PIPE='{',  # Детектив ползёт по трубе
-    HERO_PIT='⍃',  # Детектив в яме 
+    CRACK_PIT='*',
 
-    # Тоже твой детектив, но под маскировкой:
-    HERO_MASK_DIE='x',  # Детектив-маскировка переживает процесс умирания
-    HERO_MASK_LADDER='⍬',  # Детектив-маскировка находится на лестнице
-    HERO_MASK_LEFT='⊲',  # Детектив-маскировка бежит влево
-    HERO_MASK_RIGHT='⊳',  # Детектив-маскировка бежит вправо
-    HERO_MASK_FALL='⊅',  # Детектив-маскировка падает
-    HERO_MASK_PIPE='⋜',  # Детектив-маскировка ползёт по трубе
-    HERO_MASK_PIT='ᐊ',  # Детектив-маскировка в яме 
+        # Clue knife. Collect a series of clues to get the maximum
+        # points.
 
-    # Детективы других игроков отображаются так
-    OTHER_HERO_DIE='Z',  # Другой детектив переживает процесс умирания     
-    OTHER_HERO_LADDER='U',  # Другой детектив находится на лестнице
-    OTHER_HERO_LEFT=')',  # Другой детектив бежит влево
-    OTHER_HERO_RIGHT='(',  # Другой детектив бежит вправо
-    OTHER_HERO_FALL='⊐',  # Другой детектив падает        
-    OTHER_HERO_PIPE='Э',  # Другой детектив ползёт по трубе    
-    OTHER_HERO_PIT='ᗉ',  # Другой детектив в яме 
+    CLUE_KNIFE='$',
 
-    # А если детективы других игроков под маскировкой, то так
-    OTHER_HERO_MASK_DIE='⋈',  # Другой детектив-маскировка переживает процесс умирания    
-    OTHER_HERO_MASK_LADDER='⋕',  # Другой детектив-маскировка находится на лестнице
-    OTHER_HERO_MASK_LEFT='⋊',  # Другой детектив-маскировка бежит влево
-    OTHER_HERO_MASK_RIGHT='⋉',  # Другой детектив-маскировка бежит вправо
-    OTHER_HERO_MASK_FALL='⋣',  # Другой детектив-маскировка падает        
-    OTHER_HERO_MASK_PIPE='⊣',  # Другой детектив-маскировка ползёт по трубе
-    OTHER_HERO_MASK_PIT='ᗏ',  # Другой детектив-маскировка в яме 
+        # Clue glove. Collect a series of clues to get the maximum
+        # points.
 
-    # Вражеские детективы других игроков отображаются так
-    ENEMY_HERO_DIE='Ž',  # Вражеский детектив переживает процесс умирания         
-    ENEMY_HERO_LADDER='Ǔ',  # Вражеский детектив находится на лестнице       
-    ENEMY_HERO_LEFT='❫',  # Вражеский детектив бежит влево       
-    ENEMY_HERO_RIGHT='❪',  # Вражеский детектив бежит вправо       
-    ENEMY_HERO_FALL='⋥',  # Вражеский детектив падает        
-    ENEMY_HERO_PIPE='Ǯ',  # Вражеский детектив ползёт по трубе      
-    ENEMY_HERO_PIT='⇇',  # Вражеский детектив в яме 
+    CLUE_GLOVE='&',
 
-    # А если вражеские детективы других игроков под маскировкой, то так
-    ENEMY_HERO_MASK_DIE='⧓',  # Вражеский детектив-маскировка переживает процесс умирания       
-    ENEMY_HERO_MASK_LADDER='≠',  # Вражеский детектив-маскировка находится на лестнице
-    ENEMY_HERO_MASK_LEFT='⧒',  # Вражеский детектив-маскировка бежит влево
-    ENEMY_HERO_MASK_RIGHT='⧑',  # Вражеский детектив-маскировка бежит вправо
-    ENEMY_HERO_MASK_FALL='⌫',  # Вражеский детектив-маскировка падает        
-    ENEMY_HERO_MASK_PIPE='❵',  # Вражеский детектив-маскировка ползёт по трубе      
-    ENEMY_HERO_MASK_PIT='⬱',  # Вражеский детектив-маскировка в яме 
+        # Clue ring. Collect a series of clues to get the maximum
+        # points.
 
-    # Боты-воры
+    CLUE_RING='@',
+
+        # Your hero is dead. In the next tick, it will disappear and
+        # appear in a new location.
+
+    HERO_DIE='Ѡ',
+
+        # Your hero is climbing the ladder.
+
+    HERO_LADDER='Y',
+
+        # Your hero runs to the left.
+
+    HERO_LEFT='◄',
+
+        # Your hero runs to the right.
+
+    HERO_RIGHT='►',
+
+        # Your hero is falling.
+
+    HERO_FALL=']',
+
+        # Your hero is crawling along the pipe.
+
+    HERO_PIPE='{',
+
+        # Your hero in the pit.
+
+    HERO_PIT='⍃',
+
+        # Your shadow-hero is dead. In the next tick, it will
+        # disappear and appear in a new location.
+
+    HERO_MASK_DIE='x',
+
+        # Your shadow-hero is climbing the ladder.
+
+    HERO_MASK_LADDER='⍬',
+
+        # Your shadow-hero runs to the left.
+
+    HERO_MASK_LEFT='⊲',
+
+        # Your shadow-hero runs to the right.
+
+    HERO_MASK_RIGHT='⊳',
+
+        # Your shadow-hero is falling.
+
+    HERO_MASK_FALL='⊅',
+
+        # Your shadow-hero is crawling along the pipe.
+
+    HERO_MASK_PIPE='⋜',
+
+        # Your shadow-hero in the pit.
+
+    HERO_MASK_PIT='ᐊ',
+
+        # Other hero is dead. In the next tick, it will disappear and
+        # appear in a new location.
+
+    OTHER_HERO_DIE='Z',
+
+        # Other hero is climbing the ladder.
+
+    OTHER_HERO_LADDER='U',
+
+        # Other hero runs to the left.
+
+    OTHER_HERO_LEFT=')',
+
+        # Other hero runs to the right.
+
+    OTHER_HERO_RIGHT='(',
+
+        # Other hero is falling.
+
+    OTHER_HERO_FALL='⊐',
+
+        # Other hero is crawling along the pipe.
+
+    OTHER_HERO_PIPE='Э',
+
+        # Other hero in the pit.
+
+    OTHER_HERO_PIT='ᗉ',
+
+        # Other shadow-hero is dead. In the next tick, it will
+        # disappear and appear in a new location.
+
+    OTHER_HERO_MASK_DIE='⋈',
+
+        # Other shadow-hero is climbing the ladder.
+
+    OTHER_HERO_MASK_LADDER='⋕',
+
+        # Other shadow-hero runs to the left.
+
+    OTHER_HERO_MASK_LEFT='⋊',
+
+        # Other shadow-hero runs to the right.
+
+    OTHER_HERO_MASK_RIGHT='⋉',
+
+        # Other shadow-hero is falling.
+
+    OTHER_HERO_MASK_FALL='⋣',
+
+        # Other shadow-hero is crawling along the pipe.
+
+    OTHER_HERO_MASK_PIPE='⊣',
+
+        # Other shadow-hero in the pit.
+
+    OTHER_HERO_MASK_PIT='ᗏ',
+
+        # Enemy hero is dead. In the next tick, it will disappear and
+        # appear in a new location.
+
+    ENEMY_HERO_DIE='Ž',
+
+        # Enemy hero is climbing the ladder.
+
+    ENEMY_HERO_LADDER='Ǔ',
+
+        # Enemy hero runs to the left.
+
+    ENEMY_HERO_LEFT='❫',
+
+        # Enemy hero runs to the right.
+
+    ENEMY_HERO_RIGHT='❪',
+
+        # Enemy hero is falling.
+
+    ENEMY_HERO_FALL='⋥',
+
+        # Enemy hero is crawling along the pipe.
+
+    ENEMY_HERO_PIPE='Ǯ',
+
+        # Enemy hero in the pit.
+
+    ENEMY_HERO_PIT='⇇',
+
+        # Enemy shadow-hero is dead. In the next tick, it will
+        # disappear and appear in a new location.
+
+    ENEMY_HERO_MASK_DIE='⧓',
+
+        # Enemy shadow-hero is climbing the ladder.
+
+    ENEMY_HERO_MASK_LADDER='≠',
+
+        # Enemy shadow-hero runs to the left.
+
+    ENEMY_HERO_MASK_LEFT='⧒',
+
+        # Enemy shadow-hero runs to the right.
+
+    ENEMY_HERO_MASK_RIGHT='⧑',
+
+        # Enemy shadow-hero is falling.
+
+    ENEMY_HERO_MASK_FALL='⌫',
+
+        # Enemy shadow-hero is crawling along the pipe.
+
+    ENEMY_HERO_MASK_PIPE='❵',
+
+        # Enemy shadow-hero in the pit.
+
+    ENEMY_HERO_MASK_PIT='⬱',
+
+        # Robber is climbing the ladder.
+
     ROBBER_LADDER='Q',
+
+        # Robber runs to the left. Robber picks up the nearest prey
+        # and hunts for it until it overtakes it.
+
     ROBBER_LEFT='«',
+
+        # Robber runs to the right. Robber picks up the nearest prey
+        # and hunts for it until it overtakes it.
+
     ROBBER_RIGHT='»',
+
+        # Robber is falling.
+
     ROBBER_FALL='‹',
+
+        # Robber is crawling along the pipe.
+
     ROBBER_PIPE='<',
+
+        # Robber in the pit.
+
     ROBBER_PIT='⍇',
 
-    # Ворота
+        # Opened golden gates. Can only be locked with a golden key.
+
     OPENED_DOOR_GOLD='⍙',
+
+        # Opened silver gates. Can only be locked with a silver key.
+
     OPENED_DOOR_SILVER='⍚',
+
+        # Opened bronze gates. Can only be locked with a bronze key.
+
     OPENED_DOOR_BRONZE='⍜',
 
+        # Closed golden gates. Can only be opened with a golden key.
+
     CLOSED_DOOR_GOLD='⍍',
+
+        # Closed silver gates. Can only be opened with a silver key.
+
     CLOSED_DOOR_SILVER='⌺',
+
+        # Closed bronze gates. Can only be opened with a bronze key.
+
     CLOSED_DOOR_BRONZE='⌼',
 
+        # Bronze key. Helps open/close golden gates. The key can only
+        # be used once.
+
     KEY_GOLD='✦',
+
+        # Silver key. Helps open/close silver gates. The key can only
+        # be used once.
+
     KEY_SILVER='✼',
+
+        # Bronze key. Helps open/close bronze gates. The key can only
+        # be used once.
+
     KEY_BRONZE='⍟',
+
+        # Bullet. After the shot by the hero, the bullet flies until
+        # it meets an obstacle. The bullet kills the hero. It
+        # ricochets from the indestructible wall (no more than 1
+        # time). The bullet destroys the destructible wall.
 
     BULLET='•',
 
-    LADDER='H',  # Лестница - по ней можно перемещаться по уровню
-    PIPE='~',  # Труба - по ней так же можно перемещаться по уровню, но только горизонтально
+        # Ladder - the hero can move along the level along it.
 
-    BACKWAY='⊛',  # Черный ход - позволяет скрыто перемещаться в иное место на карте
+    LADDER='H',
 
-    MASK_POTION='S'  # Маскировочное зелье - наделяют детектива дополнительными способностями
+        # Pipe - the hero can also move along the level along it, but
+        # only horizontally.
+
+    PIPE='~',
+
+        # Back door - allows the hero to secretly move to another
+        # random place on the map.
+
+    BACKWAY='⊛',
+
+        # Disguise potion - endow the hero with additional abilities.
+        # The hero goes into shadow mode.
+
+    MASK_POTION='S'
 )
 
 if __name__ == '__main__':
