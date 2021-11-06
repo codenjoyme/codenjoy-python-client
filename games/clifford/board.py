@@ -36,31 +36,22 @@ class Board:
 
     def find_hero(self):
         points = self._board.find(
+            elements.get('HERO_DIE'),
+            elements.get('HERO_LADDER'),
             elements.get('HERO_LEFT'),
             elements.get('HERO_RIGHT'),
-            elements.get('HERO_CRACK_LEFT'),
-            elements.get('HERO_CRACK_RIGHT'),
-            elements.get('HERO_LADDER'),
-            elements.get('HERO_FALL_LEFT'),
-            elements.get('HERO_FALL_RIGHT'),
-            elements.get('HERO_PIPE_LEFT'),
-            elements.get('HERO_PIPE_RIGHT'),
-            elements.get('HERO_DIE'),
-            elements.get('HERO_PIT_LEFT'),
-            elements.get('HERO_PIT_RIGHT'),
+            elements.get('HERO_FALL'),
+            elements.get('HERO_PIPE'),
+            elements.get('HERO_PIT'),
 
+            elements.get('HERO_MASK_DIE'),
+            elements.get('HERO_MASK_LADDER'),
             elements.get('HERO_MASK_LEFT'),
             elements.get('HERO_MASK_RIGHT'),
-            elements.get('HERO_MASK_CRACK_LEFT'),
-            elements.get('HERO_MASK_CRACK_RIGHT'),
-            elements.get('HERO_MASK_LADDER'),
-            elements.get('HERO_MASK_FALL_LEFT'),
-            elements.get('HERO_MASK_FALL_RIGHT'),
-            elements.get('HERO_MASK_PIPE_LEFT'),
-            elements.get('HERO_MASK_PIPE_RIGHT'),
-            elements.get('HERO_MASK_DIE'),
-            elements.get('HERO_MASK_PIT_LEFT'),
-            elements.get('HERO_MASK_PIT_RIGHT'))
+            elements.get('HERO_MASK_FALL'),
+            elements.get('HERO_MASK_PIPE'),
+            elements.get('HERO_MASK_PIT'))
+
         if len(points) == 0:
             raise ValueError("hero element has not been found")
         return points.__iter__().__next__()
@@ -68,70 +59,47 @@ class Board:
     def find_other_heroes(self):
         return self._board.find(
             elements.get('OTHER_HERO_DIE'),
-            elements.get('OTHER_HERO_CRACK_LEFT'),
-            elements.get('OTHER_HERO_CRACK_RIGHT'),
             elements.get('OTHER_HERO_LADDER'),
             elements.get('OTHER_HERO_LEFT'),
             elements.get('OTHER_HERO_RIGHT'),
-            elements.get('OTHER_HERO_FALL_LEFT'),
-            elements.get('OTHER_HERO_FALL_RIGHT'),
-            elements.get('OTHER_HERO_PIPE_LEFT'),
-            elements.get('OTHER_HERO_PIPE_RIGHT'),
-            elements.get('OTHER_HERO_PIT_LEFT'),
-            elements.get('OTHER_HERO_PIT_RIGHT'),
+            elements.get('OTHER_HERO_FALL'),
+            elements.get('OTHER_HERO_PIPE'),
+            elements.get('OTHER_HERO_PIT'),
 
             elements.get('OTHER_HERO_MASK_DIE'),
-            elements.get('OTHER_HERO_MASK_CRACK_LEFT'),
-            elements.get('OTHER_HERO_MASK_CRACK_RIGHT'),
             elements.get('OTHER_HERO_MASK_LADDER'),
             elements.get('OTHER_HERO_MASK_LEFT'),
             elements.get('OTHER_HERO_MASK_RIGHT'),
-            elements.get('OTHER_HERO_MASK_FALL_LEFT'),
-            elements.get('OTHER_HERO_MASK_FALL_RIGHT'),
-            elements.get('OTHER_HERO_MASK_PIPE_LEFT'),
-            elements.get('OTHER_HERO_MASK_PIPE_RIGHT'),
-            elements.get('OTHER_HERO_MASK_PIT_LEFT'),
-            elements.get('OTHER_HERO_MASK_PIT_RIGHT'))
+            elements.get('OTHER_HERO_MASK_FALL'),
+            elements.get('OTHER_HERO_MASK_PIPE'),
+            elements.get('OTHER_HERO_MASK_PIT'))
 
     def find_enemy_heroes(self):
         return self._board.find(
             elements.get('ENEMY_HERO_DIE'),
-            elements.get('ENEMY_HERO_CRACK_LEFT'),
-            elements.get('ENEMY_HERO_CRACK_RIGHT'),
             elements.get('ENEMY_HERO_LADDER'),
             elements.get('ENEMY_HERO_LEFT'),
             elements.get('ENEMY_HERO_RIGHT'),
-            elements.get('ENEMY_HERO_FALL_LEFT'),
-            elements.get('ENEMY_HERO_FALL_RIGHT'),
-            elements.get('ENEMY_HERO_PIPE_LEFT'),
-            elements.get('ENEMY_HERO_PIPE_RIGHT'),
-            elements.get('ENEMY_HERO_PIT_LEFT'),
-            elements.get('ENEMY_HERO_PIT_RIGHT'),
+            elements.get('ENEMY_HERO_FALL'),
+            elements.get('ENEMY_HERO_PIPE'),
+            elements.get('ENEMY_HERO_PIT'),
 
             elements.get('ENEMY_HERO_MASK_DIE'),
-            elements.get('ENEMY_HERO_MASK_CRACK_LEFT'),
-            elements.get('ENEMY_HERO_MASK_CRACK_RIGHT'),
             elements.get('ENEMY_HERO_MASK_LADDER'),
             elements.get('ENEMY_HERO_MASK_LEFT'),
             elements.get('ENEMY_HERO_MASK_RIGHT'),
-            elements.get('ENEMY_HERO_MASK_FALL_LEFT'),
-            elements.get('ENEMY_HERO_MASK_FALL_RIGHT'),
-            elements.get('ENEMY_HERO_MASK_PIPE_LEFT'),
-            elements.get('ENEMY_HERO_MASK_PIPE_RIGHT'),
-            elements.get('ENEMY_HERO_MASK_PIT_LEFT'),
-            elements.get('ENEMY_HERO_MASK_PIT_RIGHT'))
+            elements.get('ENEMY_HERO_MASK_FALL'),
+            elements.get('ENEMY_HERO_MASK_PIPE'),
+            elements.get('ENEMY_HERO_MASK_PIT'))
 
     def find_robbers(self):
         return self._board.find(
             elements.get('ROBBER_LADDER'),
             elements.get('ROBBER_LEFT'),
             elements.get('ROBBER_RIGHT'),
-            elements.get('ROBBER_FALL_LEFT'),
-            elements.get('ROBBER_FALL_RIGHT'),
-            elements.get('ROBBER_PIPE_LEFT'),
-            elements.get('ROBBER_PIPE_RIGHT'),
-            elements.get('ROBBER_PIT_LEFT'),
-            elements.get('ROBBER_PIT_RIGHT'))
+            elements.get('ROBBER_FALL'),
+            elements.get('ROBBER_PIPE'),
+            elements.get('ROBBER_PIT'))
 
     def find_barriers(self):
         return self._board.find(
