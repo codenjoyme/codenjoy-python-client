@@ -45,7 +45,7 @@ class Board:
             elements.get('DEAD_HERO'),
         )
         if len(points) == 0:
-            raise ValueError("hero element has not been found")
+            raise ValueError("Hero element has not been found")
         return points.__iter__().__next__()
 
     def is_game_over(self):
