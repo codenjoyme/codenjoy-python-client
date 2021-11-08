@@ -32,12 +32,49 @@ class Board:
     def __init__(self, message):
         self._board = GameBoard(elements.values(), message)
 
+    def get_at(self, pt):
+        if not pt.is_valid(self._board.get_size()):
+            return elements.get('WALL')
+        return self._board.get_at(pt)
+
+    def find_hero(self):
+        points = self._board.find(
+            elements.get('HERO'),
+            elements.get('DEAD_HERO'),
+        )
+        if len(points) == 0:
+            raise ValueError("Hero element has not been found")
+        return points.__iter__().__next__()
+
     def is_game_over(self):
         return self._board.find_first(elements.get('DEAD_HERO')) is not None
 
-    def __str__(self):
-        return self._board.__str__()
+    def find_other_heroes(self):
+        return self._board.find(elements.get('OTHER_HERO'),
+                                elements.get('OTHER_DEAD_HERO'))
 
+    def find_bombs(self):
+        return self._board.find(elements.get('BOMB'))
+
+    def find_gold(self):
+            return self._board.find(elements.get('GOLD'))
+
+    def find_barriers(self):
+        points = set()
+        points.update(self.find_walls())
+        points.update(self.find_bombs())
+        points.update(self.find_other_heroes())
+        return sorted(points)
+
+    def find_walls(self):
+        return self._board.find(elements.get('WALL'))
+
+    def __str__(self):
+        return self._board.__str__() + \
+               "\nHero at: " + repr(self.find_hero()) + \
+               "\nOther heroes at: " + repr(self.find_other_heroes()) + \
+               "\nBombs at: " + repr(self.find_bombs()) + \
+               "\nGold at: " + repr(self.find_gold())
 
 if __name__ == '__main__':
     raise RuntimeError("This module is not intended to be ran from CLI")
