@@ -24,37 +24,53 @@
 
 elements = dict(
 
-        # Empty place where the hero can go.
+        # Пустое место в космосе. Сюда может переместиться корабль.
 
     NONE=' ',
 
-        # Wall you cant walk through.
+        # Инопланетянин. Атакует всех.
 
-    WALL='☼',
+    ENEMY='X',
 
-        # Your hero.
+        # Твоя база. Ее нужно защищать.
 
-    HERO='☺',
+    BASE='☺',
 
-        # Heroes of other players.
+        # Твой корабль.
 
-    OTHER_HERO='☻',
+    SPACESHIP='.',
 
-        # Your hero died. His body will disappear in the next tick.
+        # Твоя платформа.
 
-    DEAD_HERO='X',
+    PLATFORM='=',
 
-        # Another player's hero died.
+        # Защитники твоей базы. Выносят вначале их, потом саму базу.
 
-    OTHER_DEAD_HERO='Y',
+    GUARD='+',
 
-        # Gold. It must be picked up.
+        # Базы твоих противников.
 
-    GOLD='$',
+    OTHER_BASE='☻',
 
-        # Bomb planted by the hero. You can blow up on it.
+        # Корабли противников.
 
-    BOMB='x'
+    OTHER_SPACESHIP=',',
+
+        # Платформы противников.
+
+    OTHER_PLATFORM='-',
+
+        # Защитники баз противников.
+
+    OTHER_GUARD='*',
+
+        # Туман войны.
+
+    FOG='F',
+
+        # Космос.
+
+    BACKGROUND='G'
 )
 
 if __name__ == '__main__':

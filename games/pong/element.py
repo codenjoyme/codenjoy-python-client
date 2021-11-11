@@ -24,37 +24,29 @@
 
 elements = dict(
 
-        # Empty place where the hero can go.
+        # Пустое место на поле.
 
     NONE=' ',
 
-        # Wall you cant walk through.
+        # Вертикальная граница поля.
 
-    WALL='☼',
+    VERTICAL_WALL='|',
 
-        # Your hero.
+        # Горизонтальная граница поля.
 
-    HERO='☺',
+    HORIZONTAL_WALL='-',
 
-        # Heroes of other players.
+        # Мяч.
 
-    OTHER_HERO='☻',
+    BALL='o',
 
-        # Your hero died. His body will disappear in the next tick.
+        # Игровая панель противника (доска отбивающая мяч).
 
-    DEAD_HERO='X',
+    PANEL='#',
 
-        # Another player's hero died.
+        # Твоя игровая панель (доска отбивающая мяч).
 
-    OTHER_DEAD_HERO='Y',
-
-        # Gold. It must be picked up.
-
-    GOLD='$',
-
-        # Bomb planted by the hero. You can blow up on it.
-
-    BOMB='x'
+    HERO='H'
 )
 
 if __name__ == '__main__':
