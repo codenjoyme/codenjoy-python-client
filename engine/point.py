@@ -10,12 +10,12 @@
 # it under the terms of the GNU General Public License as
 # published by the Free Software Foundation, either version 3 of the
 # License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public
 # License along with this program.  If not, see
 # <http://www.gnu.org/licenses/gpl-3.0.html>.
@@ -28,12 +28,15 @@ class Point:
         self._x = int(x)
         self._y = int(y)
 
-    def __key(self):
+    @property
+    def key(self):
         return self._x, self._y
 
+    @property
     def x(self):
         return self._x
 
+    @property
     def y(self):
         return self._y
 
@@ -41,39 +44,39 @@ class Point:
         return (0 <= self._x <= board_size) and (0 <= self._y <= board_size)
 
     def __lt__(self, other):
-        return (self.x(), self.y()) < (other.x(), other.y())
+        return (self.x, self.y) < (other.x, other.y)
 
     def __gt__(self, other):
-        return (self._x, self._y) > (other.x(), other.y())
+        return (self._x, self._y) > (other.x, other.y)
 
     def __eq__(self, other_point):
-        return self.__key() == other_point.__key()
+        return self.key == other_point.key
 
     def __hash__(self):
-        return hash(self.__key())
+        return hash(self.key)
 
     def __repr__(self):
         return str(self)
 
     def __str__(self):
-        return "[{},{}]".format(self._x, self._y)
+        return f"[{self._x},{self._y}]"
 
 
 def step_right(pt):
-    return Point(pt.x() + 1, pt.y())
+    return Point(pt.x + 1, pt.y)
 
 
 def step_left(pt):
-    return Point(pt.x() - 1, pt.y())
+    return Point(pt.x - 1, pt.y)
 
 
 def step_up(pt):
-    return Point(pt.x(), pt.y() + 1)
+    return Point(pt.x, pt.y + 1)
 
 
 def step_down(pt):
-    return Point(pt.x(), pt.y() - 1)
+    return Point(pt.x, pt.y - 1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise RuntimeError("This module is not expected to be ran from CLI")
