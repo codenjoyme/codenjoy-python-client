@@ -39,7 +39,7 @@ class TestSolver(TestCase):
         message = "board=" \
                   "☼☼☼☼☼" \
                   "☼   ☼" \
-                  "☼ ⊳ ☼" \
+                  "☼ ► ☼" \
                   "☼   ☼" \
                   "☼☼☼☼☼"
         self.assertEqual("ACT", Solver().answer(message))

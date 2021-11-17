@@ -37,150 +37,150 @@ from games.clifford.element import elements
 
 class TestBoard(TestCase):
     def test_is_game_over(self):
-        board = Board("###" + "##►" + "###");
+        board = Board("#####►###");
         self.assertEqual(False, board.is_game_over())
 
-        board = Board("###" + "Ѡ##" + "###");
+        board = Board("###O#####");
         self.assertEqual(True, board.is_game_over())
         
-        board = Board("###" + "x##" + "###");
+        board = Board("###o#####");
         self.assertEqual(True, board.is_game_over())
 
     def test_find_hero(self):
-        board = Board("Ѡ##" + "###" + "###")
+        board = Board("O########")
         self.assertEqual(Point(0, 2), board.find_hero())
                        
-        board = Board("###" + "Y##" + "###")
+        board = Board("###A#####")
         self.assertEqual(Point(0, 1), board.find_hero())
         
-        board = Board("###" + "#◄#" + "###")
+        board = Board("####◄####")
         self.assertEqual(Point(1, 1), board.find_hero())
         
-        board = Board("###" + "##►" + "###")
+        board = Board("#####►###")
         self.assertEqual(Point(2, 1), board.find_hero())
         
-        board = Board("###" + "###" + "]##")
+        board = Board("######U##")
         self.assertEqual(Point(0, 0), board.find_hero())
                 
-        board = Board("###" + "###" + "##{")
+        board = Board("########I")
         self.assertEqual(Point(2, 0), board.find_hero())
                       
-        board = Board("###" + "###" + "##⍃")
+        board = Board("########E")
         self.assertEqual(Point(2, 0), board.find_hero())
         
-        board = Board("⍃Ѡ " + "Y◄►" + "]{ ");
+        board = Board("EO A◄►UI ");
         self.assertEqual(Point(0, 0), board.find_hero())
 
     def test_find_hero_mask(self):
-        board = Board("x##" + "###" + "###")
+        board = Board("o########")
         self.assertEqual(Point(0, 2), board.find_hero())
                        
-        board = Board("###" + "⍬##" + "###")
+        board = Board("###a#####")
         self.assertEqual(Point(0, 1), board.find_hero())
         
-        board = Board("###" + "#⊲#" + "###")
+        board = Board("####h####")
         self.assertEqual(Point(1, 1), board.find_hero())
         
-        board = Board("###" + "##⊳" + "###")
+        board = Board("#####w###")
         self.assertEqual(Point(2, 1), board.find_hero())
         
-        board = Board("###" + "###" + "⊅##")
+        board = Board("######u##")
         self.assertEqual(Point(0, 0), board.find_hero())
                         
-        board = Board("###" + "###" + "##⋜")
+        board = Board("########i")
         self.assertEqual(Point(2, 0), board.find_hero())
                 
-        board = Board("###" + "###" + "##ᐊ")
+        board = Board("########e")
         self.assertEqual(Point(2, 0), board.find_hero())
                 
-        board = Board("ᐊx " + "⍬⊲⊳" + "⊅⋜ ")
+        board = Board("eo awhui ")
         self.assertEqual(Point(0, 0), board.find_hero())
 
     def test_find_hero_no_result(self):
-        board = Board("###" + "###" + "###")
+        board = Board("#########")
         self.assertRaises(ValueError, lambda: board.find_hero())
 
     def test_find_other_heroes(self):
-        board = Board("Z( " + "U) " + "ᗉЭ⊐")
+        board = Board("C» D« KJF")
         self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2),
              Point(2, 0)], board.find_other_heroes())
 
-        board = Board("⋈⋣ " + "⋊⋉ " + "⊣ᗏ⋕")
+        board = Board("cz dZ kjf")
         self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2),
              Point(2, 0)], board.find_other_heroes())
 
     def test_find_enemy_heroes(self):
-        board = Board("Ž❪ " + "Ǔ❫ " + "⋥Ǯ⇇")
+        board = Board("LP NQ RTV")
         self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2),
              Point(2, 0)],  board.find_enemy_heroes())
 
-        board = Board("⧓⬱ " + "≠⧒ " + "⌫❵⧑")
+        board = Board("lp nq rtv")
         self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2),
              Point(2, 0)],  board.find_enemy_heroes())
 
     def test_find_robbers(self):
-        board = Board("Q« " + "‹< " + "»⍇ ")
+        board = Board("X) xY (y ")
         self.assertEqual(
             [Point(0, 0), Point(0, 1), Point(0, 2),
              Point(1, 0), Point(1, 1), Point(1, 2)], board.find_robbers())
 
     def test_find_barriers(self):
-        board = Board("  #" + "  ☼" + "   ")
+        board = Board("  #  ☼   ")
         self.assertEqual([Point(2, 1), Point(2, 2)], board.find_barriers())
 
     def test_find_pits(self):
-        board = Board("123" + "4**" + "###")
+        board = Board("1234**###")
         self.assertEqual([Point(0, 1), Point(0, 2), Point(1, 1),
                           Point(1, 2), Point(2, 1), Point(2, 2)], board.find_pits())
 
     def test_find_clues(self):
-        board = Board("##$" + "##&" + "##@")
+        board = Board("##$##&##@")
         self.assertEqual([Point(2, 0), Point(2, 1), Point(2, 2)], board.find_clues())
 
     def test_find_backways(self):
-        board = Board("##⊛" + "###" + "###")
+        board = Board("##W######")
         self.assertEqual([Point(2, 2)], board.find_backways())
 
     def test_find_potions(self):
-        board = Board("##S" + "###" + "###")
+        board = Board("##m######")
         self.assertEqual([Point(2, 2)], board.find_potions())
 
     def test_find_doors(self):
-        board = Board("⍙⍚⍜" + "⍍⌺⌼" + "###")
+        board = Board("gsbGSB###")
         self.assertEqual([Point(0, 1), Point(0, 2), Point(1, 1),
                           Point(1, 2), Point(2, 1), Point(2, 2)], board.find_doors())
 
     def test_find_keys(self):
-        board = Board("✦✼⍟" + "###" + "###")
+        board = Board("+-!######")
         self.assertEqual([Point(0, 2), Point(1, 2), Point(2, 2)], board.find_keys())
 
     def test_report(self):
         board = Board("board=" +
                       "☼☼☼☼☼☼☼☼☼" +
                       "☼ ►*## $☼" +
-                      "☼ H ⧒⧒ ✼☼" +
-                      "☼ H  1 ⍍☼" +
-                      "☼S   &  ☼" +
-                      "☼ ✦ ~~~ ☼" +
-                      "☼Z3 ⌺   ☼" +
-                      "☼ @@  Q ☼" +
+                      "☼ H pq -☼" +
+                      "☼ H  1 G☼" +
+                      "☼m   &  ☼" +
+                      "☼ + ~~~ ☼" +
+                      "☼Z3 S   ☼" +
+                      "☼ @@  X ☼" +
                       "☼☼☼☼☼☼☼☼☼")
         self.assertEqual("☼☼☼☼☼☼☼☼☼\n" +
                          "☼ ►*## $☼\n" +
-                         "☼ H ⧒⧒ ✼☼\n" +
-                         "☼ H  1 ⍍☼\n" +
-                         "☼S   &  ☼\n" +
-                         "☼ ✦ ~~~ ☼\n" +
-                         "☼Z3 ⌺   ☼\n" +
-                         "☼ @@  Q ☼\n" +
+                         "☼ H pq -☼\n" +
+                         "☼ H  1 G☼\n" +
+                         "☼m   &  ☼\n" +
+                         "☼ + ~~~ ☼\n" +
+                         "☼Z3 S   ☼\n" +
+                         "☼ @@  X ☼\n" +
                          "☼☼☼☼☼☼☼☼☼\n" +
                          "\n" +
                          "Hero at: [2,7]\n"
