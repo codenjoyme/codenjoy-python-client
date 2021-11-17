@@ -22,6 +22,7 @@
 # #L%
 ###
 
+
 class Direction:
     def __init__(self, name, value, dx, dy):
         self._name = name
@@ -29,6 +30,7 @@ class Direction:
         self._dx = int(dx)
         self._dy = int(dy)
 
+    @property
     def value(self):
         return self._value
 
@@ -47,7 +49,7 @@ class Direction:
             return DOWN
         if self == DOWN:
             return UP
-        raise ValueError("Cant invert for: " + self.__str__())
+        raise ValueError(f"Cant invert for: {str(self)}")
 
     def __str__(self):
         return self._name
@@ -61,5 +63,5 @@ ACT = Direction("ACT", 4, 0, 0)
 STOP = Direction("STOP", 5, 0, 0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise RuntimeError("This module is not designed to be ran from CLI")

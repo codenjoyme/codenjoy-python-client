@@ -23,7 +23,6 @@
 ###
 
 import math
-from math import sqrt
 
 from engine.point import Point
 
@@ -33,18 +32,20 @@ class GameBoard:
         message = message.replace("board=", "")
         self._elements = self.__init_elements_array(supported_elements, message)
         self._len = len(self._elements)
-        self._size = int(sqrt(self._len))
+        self._size = int(math.sqrt(self._len))
 
-    def __init_elements_array(self, supported_elements, message):
+    @staticmethod
+    def __init_elements_array(supported_elements, message):
         _elements = []
         for next_element in message:
             if next_element not in supported_elements:
-                raise ValueError("invalid element: " + str(next_element))
-            else:
-                _elements.append(next_element)
+                raise ValueError(f"invalid element: {str(next_element)}")
+
+            _elements.append(next_element)
         return _elements
 
-    def get_size(self):
+    @property
+    def size(self):
         return self._size
 
     def get_at(self, pt):
@@ -54,43 +55,40 @@ class GameBoard:
 
     def find(self, *wanted):
         _points = set()
-        for i in range(0, self._len):
-            if self._elements[i] in wanted:
+        for i, e in enumerate(self._elements):
+            if e in wanted:
                 _points.add(self.__index_to_point(i))
         return sorted(_points)
 
     def find_first(self, *wanted):
-        for i in range(0, self._len):
-            if self._elements[i] in wanted:
+        for i, e in enumerate(self._elements):
+            if e in wanted:
                 return self.__index_to_point(i)
         return None
 
     def is_at(self, pt, *wanted):
-        if not pt.is_valid(self._size):
-            return False
-        return self.get_at(pt) in wanted
+        return pt.is_valid(self._size) and self.get_at(pt) in wanted
 
     def find_near(self, pt):
         _elements = []
 
-        right = Point(pt.x() + 1, pt.y())
+        right = Point(pt.x + 1, pt.y)
         if right.is_valid(self._size):
             _elements.append(self.get_at(right))
-        left = Point(pt.x() - 1, pt.y())
+        left = Point(pt.x - 1, pt.y)
         if left.is_valid(self._size):
             _elements.append(self.get_at(left))
-        up = Point(pt.x(), pt.y() + 1)
+        up = Point(pt.x, pt.y + 1)
         if up.is_valid(self._size):
             _elements.append(self.get_at(up))
-        down = Point(pt.x(), pt.y() - 1)
+        down = Point(pt.x, pt.y - 1)
         if down.is_valid(self._size):
             _elements.append(self.get_at(down))
 
         return _elements
 
     def count_near(self, pt, *wanted):
-        elements_near = list(set(self.find_near(pt)) & set(wanted))
-        return len(elements_near)
+        return len(set(self.find_near(pt)) & set(wanted))
 
     def is_near(self, pt, *wanted):
         for el in wanted:
@@ -99,7 +97,7 @@ class GameBoard:
         return False
 
     def __point_to_index(self, pt):
-        return (self._size - 1 - pt.y()) * self._size + pt.x()
+        return (self._size - 1 - pt.y) * self._size + pt.x
 
     def __index_to_point(self, index):
         x = index % self._size
@@ -109,12 +107,12 @@ class GameBoard:
     def __str__(self):
         _str = ""
         for y in range(self._size - 1, -1, -1):
-            for x in range(0, self._size):
+            for x in range(self._size):
                 index = self.__point_to_index(Point(x, y))
                 _str += self._elements[index]
             _str += "\n"
         return _str
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise RuntimeError("This module is not designed to be ran from CLI")

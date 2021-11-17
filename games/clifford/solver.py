@@ -24,22 +24,24 @@
 
 from engine import direction
 from engine.game_solver import GameSolver
-from games.clifford.board import Board
+
+from .board import Board
+
 
 class Solver(GameSolver):
 
     def answer(self, message):
         board = Board(message)
-        print("Board \n" + board.__str__())
+        print("Board \n" + str(board))
         action = self.__next_action()
-        print("\nAnswer: " + action.__str__())
+        print("\nAnswer: " + str(action))
         print("-------------------------------------------------------------")
-        return action.__str__()
+        return str(action)
 
     def __next_action(self):
         # TODO: write your code here
         return direction.ACT
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise RuntimeError("This module is not intended to be ran from CLI")

@@ -33,7 +33,7 @@ class Board:
         self._board = GameBoard(elements.values(), message)
 
     def get_at(self, pt):
-        if not pt.is_valid(self._board.get_size()):
+        if not pt.is_valid(self._board.size):
             return elements.get('WALL')
         return self._board.get_at(pt)
 

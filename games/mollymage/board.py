@@ -34,7 +34,7 @@ class Board:
         self._board = GameBoard(elements.values(), message)
 
     def get_at(self, pt):
-        if not pt.is_valid(self._board.get_size()):
+        if not pt.is_valid(self._board.size):
             return elements.get('WALL')
         return self._board.get_at(pt)
 
@@ -110,7 +110,7 @@ class Board:
         _points = []
         for i in range(0, self.BLAST_RANGE):
             pt = next_step(pt)
-            if not pt.is_valid(self._board.get_size()):
+            if not pt.is_valid(self._board.size):
                 break
             if pt in _barriers:
                 break
