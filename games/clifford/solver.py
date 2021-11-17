@@ -40,7 +40,7 @@ class Solver(GameSolver):
 
     def __next_action(self):
         # TODO: write your code here
-        return direction.ACT
+        return direction.RIGHT
 
 
 if __name__ == "__main__":
