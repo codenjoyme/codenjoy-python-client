@@ -9,6 +9,7 @@ if "%INSTALL_LOCALLY%"=="false" ( goto :skip )
 if "%INSTALL_LOCALLY%"=="" ( goto :skip )
 
 call lib :install python %ARCH_URL% %ARCH_FOLDER%
+
 call lib :print_color %PYTHON% --version
 
 call lib :ask
