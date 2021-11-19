@@ -26,18 +26,19 @@ eval_echo "[[ \"$NO_PYTHON\" == \"true\" ]] && export PATH=$PYTHON_HOME/bin:$PAT
 
 eval_echo "[[ \"$NO_PYTHON\" == \"true\" ]] && export OPENSSL_HOME=$ROOT/.openssl"
 eval_echo "[[ \"$NO_PYTHON\" == \"true\" ]] && export PATH=$OPENSSL_HOME/bin:$PATH"
+eval_echo "[[ \"$NO_PYTHON\" == \"true\" ]] && export LD_LIBRARY_PATH=$OPENSSL_HOME/lib:$LD_LIBRARY_PATH"
 
-eval_echo "PYTHON=$PYTHON_HOME/bin/python3.10"
+eval_echo "PYTHON=$PYTHON_HOME/bin/python3.7"
 eval_echo "OPENSSL=$OPENSSL_HOME/bin/openssl"
 
 color $COLOR4 "PATH=$PATH"
 color $COLOR4 "PYTHON_HOME=$PYTHON_HOME"
 echo
 
-eval_echo "ARCH_URL=https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz"
-eval_echo "ARCH_FOLDER=Python-3.10.0"
+eval_echo "ARCH_URL=https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz"
+eval_echo "ARCH_FOLDER=Python-3.7.7"
 
-eval_echo "OPENSSL_ARCH_URL=https://www.openssl.org/source/openssl-3.0.0.tar.gz"
-eval_echo "OPENSSL_ARCH_FOLDER=openssl-3.0.0"
+eval_echo "OPENSSL_ARCH_URL=https://www.openssl.org/source/openssl-1.1.1d.tar.gz"
+eval_echo "OPENSSL_ARCH_FOLDER=openssl-1.1.1d"
 
 eval_echo "PYTHON_CLIENT_HOME=$ROOT"

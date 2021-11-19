@@ -23,11 +23,11 @@ if [[ "$ask_result" == "y" ]]; then
 
     eval_echo "sudo rm -rf $ROOT/.openssl"
     eval_echo "cd $ROOT/.openssl-sources"
-    eval_echo "./config --prefix=$ROOT/.openssl"
+    eval_echo "./config --prefix=$OPENSSL_HOME --openssldir=$OPENSSL_HOME"
     eval_echo "sudo make"
-    eval_echo "sudo make install"
+    eval_echo "sudo make install_sw"
 
-    eval_echo "sudo ldconfig $ROOT/.openssl/lib64"
+    eval_echo "sudo ln -s /etc/ssl/certs $OPENSSL_HOME/certs"
 else
    color $COLOR4 "Skipped"
 fi
@@ -40,9 +40,11 @@ if [[ "$ask_result" == "y" ]]; then
 
     eval_echo "sudo rm -rf $ROOT/.python"
     eval_echo "cd $ROOT/.python-sources"
-    eval_echo "./configure --prefix=$PYTHON_HOME"
+    eval_echo "./configure --enable-shared --with-openssl=$OPENSSL_HOME --prefix=$PYTHON_HOME"
     eval_echo "sudo make"
     eval_echo "sudo make install"
+
+    eval_echo "sudo ldconfig $PYTHON_HOME/lib"
 else
    color $COLOR4 "Skipped"
 fi
