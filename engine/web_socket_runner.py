@@ -61,7 +61,7 @@ class WebSocketRunner(WebSocketApp):
             print_exception(*exc_info())
 
     def _on_error(self, webclient, error):
-        print("websocket connection error " + error)
+        print("websocket connection error: " + str(error))
 
     def _on_close(self, webclient):
         print("websocket connection has been closed")
