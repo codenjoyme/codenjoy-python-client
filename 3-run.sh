@@ -38,7 +38,7 @@ echo
 color $COLOR1 "Building client..."
 echo
 
-    eval_echo "DOCKER_BUILDKIT=1 docker build -t client-server -f Dockerfile ./ --build-arg SERVER_URL=$BOARD_URL --build-arg GAME_TO_RUN=$GAME_TO_RUN"
+    eval_echo "DOCKER_BUILDKIT=1 docker build -t client-server -f Dockerfile ./ --build-arg SERVER_URL=$SERVER_URL --build-arg GAME_TO_RUN=$GAME_TO_RUN"
 
 color $COLOR1 "Starting client..."
 echo

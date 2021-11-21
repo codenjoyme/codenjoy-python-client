@@ -4,6 +4,6 @@ echo off
 call lib :color Starting python client...
 echo on
 
-call %PYTHON% main.py %GAME_TO_RUN% %BOARD_URL%
+call %PYTHON% main.py %GAME_TO_RUN% %SERVER_URL%
 
 call lib :ask
