@@ -1,6 +1,7 @@
 **/__pycache__/
 .python/
 .tools/*.zip
+temp
 
 # macOS
 .DS_Store
