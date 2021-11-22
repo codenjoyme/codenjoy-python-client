@@ -24,15 +24,10 @@
 
 
 class Direction:
-    def __init__(self, name, value, dx, dy):
+    def __init__(self, name, dx, dy):
         self._name = name
-        self._value = int(value)
         self._dx = int(dx)
         self._dy = int(dy)
-
-    @property
-    def value(self):
-        return self._value
 
     def change_x(self, x):
         return x + self._dx
@@ -55,12 +50,12 @@ class Direction:
         return self._name
 
 
-LEFT = Direction("LEFT", 0, -1, 0)
-RIGHT = Direction("RIGHT", 1, 1, 0)
-UP = Direction("UP", 2, 0, 1)
-DOWN = Direction("DOWN", 3, 0, -1)
-ACT = Direction("ACT", 4, 0, 0)
-STOP = Direction("STOP", 5, 0, 0)
+LEFT = Direction("LEFT", -1, 0)
+RIGHT = Direction("RIGHT", 1, 0)
+UP = Direction("UP", 0, 1)
+DOWN = Direction("DOWN", 0, -1)
+ACT = Direction("ACT", 0, 0)
+STOP = Direction("STOP", 0, 0)
 
 
 if __name__ == "__main__":

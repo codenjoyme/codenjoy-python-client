@@ -34,12 +34,12 @@ sys.path.append(file_dir)
 
 class TestDirection(TestCase):
     def test_value(self):
-        self.assertEqual(0, direction.LEFT.value)
-        self.assertEqual(1, direction.RIGHT.value)
-        self.assertEqual(2, direction.UP.value)
-        self.assertEqual(3, direction.DOWN.value)
-        self.assertEqual(4, direction.ACT.value)
-        self.assertEqual(5, direction.STOP.value)
+        self.assertEqual("LEFT", str(direction.LEFT))
+        self.assertEqual("RIGHT", str(direction.RIGHT))
+        self.assertEqual("UP", str(direction.UP))
+        self.assertEqual("DOWN", str(direction.DOWN))
+        self.assertEqual("ACT", str(direction.ACT))
+        self.assertEqual("STOP", str(direction.STOP))
 
     def test_change_x(self):
         self.assertEqual(0, direction.LEFT.change_x(1))
