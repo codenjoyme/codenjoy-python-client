@@ -32,7 +32,6 @@ from unittest import TestCase
 
 from engine.point import Point
 from games.clifford.board import Board
-from games.clifford.element import elements
 
 
 class TestBoard(TestCase):

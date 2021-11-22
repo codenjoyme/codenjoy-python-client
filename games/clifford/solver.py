@@ -22,7 +22,7 @@
 # #L%
 ###
 
-from engine import direction
+from games.clifford import direction
 from engine.game_solver import GameSolver
 
 from .board import Board
