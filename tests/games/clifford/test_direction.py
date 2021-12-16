@@ -26,7 +26,7 @@ import os.path
 import sys
 from unittest import TestCase
 
-from engine import direction
+from games.clifford import direction
 
 file_dir = os.path.dirname(__file__)
 sys.path.append(file_dir)
@@ -40,6 +40,15 @@ class TestDirection(TestCase):
         self.assertEqual("DOWN", str(direction.DOWN))
         self.assertEqual("ACT", str(direction.ACT))
         self.assertEqual("STOP", str(direction.STOP))
+        self.assertEqual("ACT,LEFT", str(direction.CRACK_LEFT))
+        self.assertEqual("ACT,RIGHT", str(direction.CRACK_RIGHT))
+        self.assertEqual("ACT(0)", str(direction.DIE))
+        self.assertEqual("ACT(1),LEFT", str(direction.SHOOT_LEFT))
+        self.assertEqual("ACT(1),RIGHT", str(direction.SHOOT_RIGHT))
+        self.assertEqual("ACT(2),LEFT", str(direction.OPEN_DOOR_LEFT))
+        self.assertEqual("ACT(2),RIGHT", str(direction.OPEN_DOOR_RIGHT))
+        self.assertEqual("ACT(3),LEFT", str(direction.CLOSE_DOOR_LEFT))
+        self.assertEqual("ACT(3),RIGHT", str(direction.CLOSE_DOOR_RIGHT))
 
     def test_change_x(self):
         self.assertEqual(0, direction.LEFT.change_x(1))
