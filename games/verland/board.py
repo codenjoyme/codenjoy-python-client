@@ -81,14 +81,14 @@ class Board:
     def count_contagions(self, pt):
         return int(self._board.get_at(pt)) if self._board.is_at(pt,
                                                                 elements.get("CLEAR"),
-                                                                elements.get("ONE_CONTAGION"),
-                                                                elements.get("TWO_CONTAGIONS"),
-                                                                elements.get("THREE_CONTAGIONS"),
-                                                                elements.get("FOUR_CONTAGIONS"),
-                                                                elements.get("FIVE_CONTAGIONS"),
-                                                                elements.get("SIX_CONTAGIONS"),
-                                                                elements.get("SEVEN_CONTAGIONS"),
-                                                                elements.get("EIGHT_CONTAGIONS"),
+                                                                elements.get("CONTAGION_ONE"),
+                                                                elements.get("CONTAGION_TWO"),
+                                                                elements.get("CONTAGION_THREE"),
+                                                                elements.get("CONTAGION_FOUR"),
+                                                                elements.get("CONTAGION_FIVE"),
+                                                                elements.get("CONTAGION_SIX"),
+                                                                elements.get("CONTAGION_SEVEN"),
+                                                                elements.get("CONTAGION_EIGHT"),
                                                                 ) else 0
 
     def __str__(self):
