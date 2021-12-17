@@ -94,7 +94,7 @@ class Board:
                                 elements.get('ENEMY_POTION_HERO'))
 
     def find_blasts(self):
-        return self._board.find(elements.get('BOOM'))
+        return self._board.find(elements.get('BLAST'))
 
     def predict_future_blasts(self):
         blasts = set()

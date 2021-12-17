@@ -47,7 +47,7 @@ elements = dict(
         # Boom! this is what is potion does, everything that is
         # destroyable got destroyed.
 
-    BOOM='҉',
+    BLAST='҉',
 
         # Indestructible wall - it will not fall from potion.
 
