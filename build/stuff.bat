@@ -1,6 +1,9 @@
 @echo off
 
-call run :init_colors
+if "%RUN%"=="" set RUN=%CD%\run
+if "%STUFF%"=="" set STUFF=%CD%\stuff
+
+call %RUN% :init_colors
 
 :check_run_mode
     if "%*"=="" (       
@@ -12,8 +15,8 @@ call run :init_colors
 
 :run_executable
     rem run stuff.bat as executable script
-    call run :color ‘%CL_INFO%‘ ‘This is not executable script. Please use 'run.bat' only.‘
-    call run :ask   
+    call %RUN% :color ‘%CL_INFO%‘ ‘This is not executable script. Please use 'run.bat' only.‘
+    call %RUN% :ask   
     goto :eof
 
 :run_library
@@ -31,19 +34,19 @@ call run :init_colors
     set PYTHON=%PYTHON_HOME%\python
 
     echo Language environment variables
-    call run :color ‘%CL_INFO%‘ ‘PATH=%PATH%‘
-    call run :color ‘%CL_INFO%‘ ‘PYTHON_HOME=%PYTHON_HOME%‘
+    call %RUN% :color ‘%CL_INFO%‘ ‘PATH=%PATH%‘
+    call %RUN% :color ‘%CL_INFO%‘ ‘PYTHON_HOME=%PYTHON_HOME%‘
 
     set ARCH_URL=https://www.python.org/ftp/python/3.9.9/python-3.9.9-embed-amd64.zip
     set ARCH_FOLDER=
     goto :eof
 
 :install
-    call run :install python %ARCH_URL% %ARCH_FOLDER%
+    call %RUN% :install python %ARCH_URL% %ARCH_FOLDER%
     goto :eof
 
 :version
-    call run :eval_echo_color ‘%PYTHON% --version‘
+    call %RUN% :eval_echo_color ‘%PYTHON% --version‘
     goto :eof
 
 :build
@@ -86,5 +89,5 @@ call run :init_colors
     goto :eof
 
 :run
-    call run :eval_echo ‘%PYTHON% main.py %GAME_TO_RUN% %SERVER_URL%‘
+    call %RUN% :eval_echo ‘%PYTHON% main.py %GAME_TO_RUN% %SERVER_URL%‘
     goto :eof
