@@ -54,40 +54,40 @@ call %RUN% :init_colors
     goto :eof
 
 :test    
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\engine\* %ROOT%\temp\engine\‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\lib\* %ROOT%\temp\lib\‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\games\* %ROOT%\temp\games\‘
-    call %ROOT%\run :eval_echo ‘cd %ROOT%\temp\‘
-    call %ROOT%\run :sep
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\engine\* %ROOT%\temp\engine\‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\lib\* %ROOT%\temp\lib\‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\games\* %ROOT%\temp\games\‘
+    call %RUN% :eval_echo ‘cd %ROOT%\temp\‘
+    call %RUN% :sep
 
-    call %ROOT%\run :color ‘%CL_HEADER%‘ ‘Engine tests...‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\tests\engine\* %ROOT%\temp\‘
-    call %ROOT%\run :eval_echo ‘%PYTHON% -m unittest discover -vvv‘
-    call %ROOT%\run :eval_echo ‘del /S /Q test_*.py‘
-    call %ROOT%\run :sep
+    call %RUN% :color ‘%CL_HEADER%‘ ‘Engine tests...‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\tests\engine\* %ROOT%\temp\‘
+    call %RUN% :eval_echo ‘%PYTHON% -m unittest discover -vvv‘
+    call %RUN% :eval_echo ‘del /S /Q test_*.py‘
+    call %RUN% :sep
 
-    call %ROOT%\run :color ‘%CL_HEADER%‘ ‘Clifford tests...‘‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\clifford\* %ROOT%\temp\‘
-    call %ROOT%\run :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
-    call %ROOT%\run :eval_echo ‘del /S /Q test_*.py‘
-    call %ROOT%\run :sep
+    call %RUN% :color ‘%CL_HEADER%‘ ‘Clifford tests...‘‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\clifford\* %ROOT%\temp\‘
+    call %RUN% :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
+    call %RUN% :eval_echo ‘del /S /Q test_*.py‘
+    call %RUN% :sep
 
-    call %ROOT%\run :color ‘%CL_HEADER%‘ ‘Mollymage tests...‘‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\mollymage\* %ROOT%\temp\‘
-    call %ROOT%\run :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
-    call %ROOT%\run :eval_echo ‘del /S /Q test_*.py‘
-    call %ROOT%\run :sep
+    call %RUN% :color ‘%CL_HEADER%‘ ‘Mollymage tests...‘‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\mollymage\* %ROOT%\temp\‘
+    call %RUN% :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
+    call %RUN% :eval_echo ‘del /S /Q test_*.py‘
+    call %RUN% :sep
 
-    call %ROOT%\run :color ‘%CL_HEADER%‘ ‘Sample tests...‘
-    call %ROOT%\run :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\sample\* %ROOT%\temp\‘
-    call %ROOT%\run :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
-    call %ROOT%\run :eval_echo ‘del /S /Q test_*.py‘
+    call %RUN% :color ‘%CL_HEADER%‘ ‘Sample tests...‘
+    call %RUN% :eval_echo ‘xcopy /S/I/y %ROOT%\tests\games\sample\* %ROOT%\temp\‘
+    call %RUN% :eval_echo ‘call %PYTHON% -m unittest discover -vvv‘
+    call %RUN% :eval_echo ‘del /S /Q test_*.py‘
 
-    call %ROOT%\run :eval_echo ‘cd %ROOT%\‘
-    call %ROOT%\run :eval_echo ‘rd /S /Q %ROOT%\temp‘
-    call %ROOT%\run :sep
+    call %RUN% :eval_echo ‘cd %ROOT%\‘
+    call %RUN% :eval_echo ‘rd /S /Q %ROOT%\temp‘
+    call %RUN% :sep
     goto :eof
 
 :run
-    call %RUN% :eval_echo ‘%PYTHON% main.py %GAME_TO_RUN% %SERVER_URL%‘
+    call %RUN% :eval_echo ‘%PYTHON% .\main.py %GAME_TO_RUN% %SERVER_URL%‘
     goto :eof
