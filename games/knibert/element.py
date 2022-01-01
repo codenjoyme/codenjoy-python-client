@@ -38,23 +38,23 @@ elements = dict(
 
     BREAK='☼',
 
-        # An empty place in the field where the snake can go.
+        # An empty place in the field where the hero can go.
 
     NONE=' ',
 
-        # Snake head is pointing down.
+        # Hero head is pointing down.
 
     HEAD_DOWN='▼',
 
-        # Snake head is pointing left.
+        # Hero head is pointing left.
 
     HEAD_LEFT='◄',
 
-        # Snake head is pointing right.
+        # Hero head is pointing right.
 
     HEAD_RIGHT='►',
 
-        # Snake head is pointing up.
+        # Hero head is pointing up.
 
     HEAD_UP='▲',
 
@@ -66,19 +66,19 @@ elements = dict(
 
     TAIL_VERTICAL='║',
 
-        # Turning the snake body from left to down.
+        # Turning the hero body from left to down.
 
     TAIL_LEFT_DOWN='╗',
 
-        # Turning the snake body from left to up.
+        # Turning the hero body from left to up.
 
     TAIL_LEFT_UP='╝',
 
-        # Turning the snake body from right to down.
+        # Turning the hero body from right to down.
 
     TAIL_RIGHT_DOWN='╔',
 
-        # Turning the snake body from right to up.
+        # Turning the hero body from right to up.
 
     TAIL_RIGHT_UP='╚',
 
