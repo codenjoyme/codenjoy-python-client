@@ -32,9 +32,9 @@ elements = dict(
 
     REEFS='☼',
 
-        # A destroyed hero. A new appears just in a second.
+        # Explosion site. It disappears in a second.
 
-    BANG='Ѡ',
+    EXPLOSION='Ѡ',
 
         # Ice, having driven onto which hero will begin to drift.
         # During a skid, hero will repeat the old commands for several
