@@ -38,7 +38,7 @@ elements = dict(
 
         # Your hero died. His body will disappear in the next tick.
 
-    DEAD_HERO='X',
+    HERO_DEAD='X',
 
         # Heroes of other players.
 
@@ -46,7 +46,7 @@ elements = dict(
 
         # Another player's hero died.
 
-    OTHER_DEAD_HERO='Y',
+    OTHER_HERO_DEAD='Y',
 
         # Heroes of other players in other team.
 
@@ -54,7 +54,7 @@ elements = dict(
 
         # Player's Hero from the other team who died.
 
-    ENEMY_DEAD_HERO='Z',
+    ENEMY_HERO_DEAD='Z',
 
         # Gold. It must be picked up.
 

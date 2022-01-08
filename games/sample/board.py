@@ -40,18 +40,18 @@ class Board:
     def find_hero(self):
         points = self._board.find(
             elements.get('HERO'),
-            elements.get('DEAD_HERO'),
+            elements.get('HERO_DEAD'),
         )
         if len(points) == 0:
             raise ValueError("Hero element has not been found")
         return points.__iter__().__next__()
 
     def is_game_over(self):
-        return self._board.find_first(elements.get('DEAD_HERO')) is not None
+        return self._board.find_first(elements.get('HERO_DEAD')) is not None
 
     def find_other_heroes(self):
         return self._board.find(elements.get('OTHER_HERO'),
-                                elements.get('OTHER_DEAD_HERO'))
+                                elements.get('OTHER_HERO_DEAD'))
 
     def find_bombs(self):
         return self._board.find(elements.get('BOMB'))
