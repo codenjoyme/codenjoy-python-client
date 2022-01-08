@@ -41,25 +41,25 @@ class Board:
     def find_hero(self):
         points = self._board.find(
             elements.get('HERO'),
-            elements.get('POTION_HERO'),
-            elements.get('DEAD_HERO'),
+            elements.get('HERO_POTION'),
+            elements.get('HERO_DEAD'),
         )
         if len(points) == 0:
             raise ValueError("Hero element has not been found")
         return points.__iter__().__next__()
 
     def is_game_over(self):
-        return self._board.find_first(elements.get('DEAD_HERO')) is not None
+        return self._board.find_first(elements.get('HERO_DEAD')) is not None
 
     def find_other_heroes(self):
         return self._board.find(elements.get('OTHER_HERO'),
-                                elements.get('OTHER_POTION_HERO'),
-                                elements.get('OTHER_DEAD_HERO'))
+                                elements.get('OTHER_HERO_POTION'),
+                                elements.get('OTHER_HERO_DEAD'))
 
     def find_enemy_heroes(self):
         return self._board.find(elements.get('ENEMY_HERO'),
-                                elements.get('ENEMY_POTION_HERO'),
-                                elements.get('ENEMY_DEAD_HERO'))
+                                elements.get('ENEMY_HERO_POTION'),
+                                elements.get('ENEMY_HERO_DEAD'))
 
     def get_ghosts(self):
         return self._board.find(elements.get('GHOST'))
@@ -89,9 +89,9 @@ class Board:
                                 elements.get('POTION_TIMER_3'),
                                 elements.get('POTION_TIMER_4'),
                                 elements.get('POTION_TIMER_5'),
-                                elements.get('POTION_HERO'),
-                                elements.get('OTHER_POTION_HERO'),
-                                elements.get('ENEMY_POTION_HERO'))
+                                elements.get('HERO_POTION'),
+                                elements.get('OTHER_HERO_POTION'),
+                                elements.get('ENEMY_HERO_POTION'))
 
     def find_blasts(self):
         return self._board.find(elements.get('BLAST'))
