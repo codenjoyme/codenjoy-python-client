@@ -24,7 +24,7 @@
 
 elements = dict(
 
-        # Emty space.
+        # Empty space.
 
     NONE=' ',
 
