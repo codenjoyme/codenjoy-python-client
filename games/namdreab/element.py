@@ -36,10 +36,6 @@ elements = dict(
 
     START_FLOOR='#',
 
-        # .
-
-    OTHER='?',
-
         # Apple.
 
     APPLE='○',
