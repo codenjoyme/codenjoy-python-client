@@ -40,9 +40,9 @@ elements = dict(
 
     BLUEBERRY='○',
 
-        # Stone.
+        # Acorn.
 
-    STONE='●',
+    ACORN='●',
 
         # Flying pill/Angel's wings.
 
