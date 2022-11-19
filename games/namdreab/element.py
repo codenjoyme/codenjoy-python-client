@@ -36,9 +36,9 @@ elements = dict(
 
     START_SPOT='#',
 
-        # Apple.
+        # Blueberry.
 
-    APPLE='○',
+    BLUEBERRY='○',
 
         # Stone.
 
