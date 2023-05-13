@@ -48,9 +48,9 @@ elements = dict(
 
     DEATH_CAP='©',
 
-        # Fury pill/Devil's mask.
+        # Fly agaric/Devil's mask.
 
-    FURY_PILL='®',
+    FLY_AGARIC='®',
 
         # Gold.
 
@@ -76,7 +76,7 @@ elements = dict(
 
     HEAD_DEAD='☻',
 
-        # Your hero head under influence Fury pill/Devils mask.
+        # Your hero head under influence Fly agaric/Devils mask.
 
     HEAD_EVIL='♥',
 
@@ -152,7 +152,7 @@ elements = dict(
 
     ENEMY_HEAD_DEAD='☺',
 
-        # Enemy hero head under influence Fury pill/Devils mask.
+        # Enemy hero head under influence Fly agaric/Devils mask.
 
     ENEMY_HEAD_EVIL='♣',
 
